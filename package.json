@@ -1,0 +1,45 @@
+{
+  "name": "task-list",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "DEBUG=app,app* nodemon app.js",
+    "lint": "eslint app.js",
+    "scss": "sass --watch scss:public/css"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/karolbulwin/task-list.git"
+  },
+  "author": "",
+  "license": "",
+  "bugs": {
+    "url": "https://github.com/karolbulwin/task-list/issues"
+  },
+  "homepage": "https://github.com/karolbulwin/task-list#readme",
+  "dependencies": {
+    "debug": "^4.1.1",
+    "express": "^4.16.4",
+    "morgan": "^1.9.1",
+    "node-sass-middleware": "^0.11.0",
+    "nodemon": "^1.18.9",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "eslint": "^5.12.1",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-plugin-import": "^2.16.0"
+  },
+  "nodemonConfig": {
+    "ignor": [
+      "node_modules/**/node_modules"
+    ],
+    "delay": "2500",
+    "env": {
+      "NODE_ENV": "development",
+      "port": 3998
+    }
+  }
+}
