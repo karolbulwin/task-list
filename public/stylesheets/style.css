@@ -4,4 +4,22 @@ h1 {
 .progress {
   height: 0.5em; }
 
+ul > li {
+  -webkit-transition-duration: 600ms;
+  transition-duration: 600ms;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; }
+
+.checked {
+  background-color: lightgreen;
+  -webkit-text-decoration-line: line-through !important;
+  text-decoration-line: line-through !important;
+  color: #666666; }
+
+button.close span, button.close {
+  -webkit-text-decoration-line: none !important;
+  text-decoration-line: none !important; }
+
 /*# sourceMappingURL=style.css.map */

@@ -1,0 +1,28 @@
+@import 'colors';
+@import 'mixins';
+
+h1 {
+    border-bottom: 4px solid $main;
+}
+
+.progress {
+    height: 0.5em;
+}
+
+ul > li {
+    -webkit-transition-duration: 600ms;
+            transition-duration: 600ms;
+    @include user-select;
+}
+
+.checked {
+    background-color: lightgreen;
+    -webkit-text-decoration-line: line-through!important;
+            text-decoration-line: line-through!important;
+    color: lighten($main, 40%);
+}
+
+button.close span, button.close {
+    -webkit-text-decoration-line: none!important;
+            text-decoration-line: none!important;
+}
