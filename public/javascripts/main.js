@@ -53,7 +53,10 @@
 
   function removeTaskFromList(task) {
     const li = task;
-    li.remove();
+    li.classList.add('to-remove');
+    setTimeout(() => {
+      li.remove();
+    }, 600);
   }
   const taskList = document.querySelector('ul');
   taskList.addEventListener('click', (ev) => {

@@ -13,6 +13,8 @@ ul > li {
   user-select: none; }
   ul > li p {
     margin: 0; }
+  ul > li.to-remove {
+    opacity: 0; }
 
 .checked {
   -webkit-text-decoration-line: line-through !important;

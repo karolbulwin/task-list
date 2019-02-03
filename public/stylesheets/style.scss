@@ -16,6 +16,9 @@ ul > li {
     p {
         margin: 0;
     }
+    &.to-remove {
+        opacity: 0;
+    }
 }
 
 .checked {
