@@ -22,6 +22,9 @@
     const li = createHtmlElement(task);
     taskList.append(li);
   }
+  function clearAddedTask() {
+    document.querySelector('#task').value = '';
+  }
   function checkTask() {
     let isTask = true;
     let task = document.querySelector('#task').value;
@@ -35,6 +38,7 @@
     const { isTask, task } = checkTask();
     if (isTask === true) {
       addTaskToList(task);
+      clearAddedTask();
     }
   }
   document.querySelector('#button-add-task').addEventListener('click', addTask);
@@ -44,4 +48,19 @@
     }
   }
   document.addEventListener('keydown', checkTheKey);
+
+  function removeTaskFromList(task) {
+    const li = task;
+    li.remove();
+  }
+  const taskList = document.querySelector('ul');
+  taskList.addEventListener('click', (ev) => {
+    if (ev.target.tagName === 'LI') {
+      ev.target.classList.toggle('checked');
+    }
+    if (ev.target.tagName === 'SPAN') {
+      const task = ev.target.parentElement.parentElement;
+      removeTaskFromList(task);
+    }
+  }, false);
 }());
