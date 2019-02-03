@@ -11,15 +11,15 @@ ul > li {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; }
+  ul > li p {
+    margin: 0; }
 
 .checked {
-  background-color: lightgreen;
   -webkit-text-decoration-line: line-through !important;
   text-decoration-line: line-through !important;
   color: #666666; }
 
-button.close span, button.close {
-  -webkit-text-decoration-line: none !important;
-  text-decoration-line: none !important; }
+.checked-bg {
+  background-color: lightgreen; }
 
 /*# sourceMappingURL=style.css.map */

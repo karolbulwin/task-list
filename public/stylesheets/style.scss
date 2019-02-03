@@ -13,16 +13,17 @@ ul > li {
     -webkit-transition-duration: 600ms;
             transition-duration: 600ms;
     @include user-select;
+    p {
+        margin: 0;
+    }
 }
 
 .checked {
-    background-color: lightgreen;
     -webkit-text-decoration-line: line-through!important;
             text-decoration-line: line-through!important;
     color: lighten($main, 40%);
 }
 
-button.close span, button.close {
-    -webkit-text-decoration-line: none!important;
-            text-decoration-line: none!important;
+.checked-bg {
+    background-color: lightgreen;
 }

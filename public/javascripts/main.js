@@ -1,11 +1,12 @@
 (function main() {
   function createHtmlElement(task) {
     const li = document.createElement('li');
+    const p = document.createElement('p');
     const bttn = document.createElement('button');
     const span = document.createElement('span');
 
     li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
-    li.innerText = task;
+    p.innerText = task;
     bttn.type = 'button';
     bttn.classList.add('close');
     bttn.setAttribute('aria-label', 'Close');
@@ -13,6 +14,7 @@
     span.innerHTML = '&times;';
 
     bttn.append(span);
+    li.append(p);
     li.append(bttn);
 
     return li;
@@ -56,7 +58,12 @@
   const taskList = document.querySelector('ul');
   taskList.addEventListener('click', (ev) => {
     if (ev.target.tagName === 'LI') {
+      ev.target.classList.toggle('checked-bg');
+      ev.target.firstElementChild.classList.toggle('checked');
+    }
+    if (ev.target.tagName === 'P') {
       ev.target.classList.toggle('checked');
+      ev.target.parentElement.classList.toggle('checked-bg');
     }
     if (ev.target.tagName === 'SPAN') {
       const task = ev.target.parentElement.parentElement;
