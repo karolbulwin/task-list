@@ -19,6 +19,9 @@ ul > li {
     &.to-remove {
         opacity: 0;
     }
+    &.new-task {
+        opacity: 0; 
+    }
 }
 
 .checked {
