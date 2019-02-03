@@ -5,7 +5,7 @@
     const bttn = document.createElement('button');
     const span = document.createElement('span');
 
-    li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center');
+    li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center', 'new-task');
     p.innerText = task;
     bttn.type = 'button';
     bttn.classList.add('close');
@@ -23,6 +23,9 @@
     const taskList = document.querySelector('ul');
     const li = createHtmlElement(task);
     taskList.append(li);
+    setTimeout(() => {
+      li.classList.remove('new-task');
+    }, 600);
   }
   function clearAddedTask() {
     document.querySelector('#task').value = '';
@@ -36,11 +39,27 @@
     }
     return { isTask, task };
   }
+  function checkProgress() {
+    const tasks = document.querySelectorAll('li').length;
+    const tasksDone = document.querySelectorAll('li.checked-bg');
+    const progressMax = 100; // 8
+    let progressNow = 0;
+    if (tasksDone !== null) {
+      progressNow = tasksDone.length * progressMax / tasks;
+    }
+    return progressNow;
+  }
+  function setProgress() {
+    const progressBar = document.querySelector('.progress-bar');
+    const progress = checkProgress();
+    progressBar.style.width = `${progress}%`;
+  }
   function addTask() {
     const { isTask, task } = checkTask();
     if (isTask === true) {
       addTaskToList(task);
       clearAddedTask();
+      setProgress();
     }
   }
   document.querySelector('#button-add-task').addEventListener('click', addTask);
@@ -56,6 +75,7 @@
     li.classList.add('to-remove');
     setTimeout(() => {
       li.remove();
+      setProgress();
     }, 600);
   }
   const taskList = document.querySelector('ul');
@@ -76,5 +96,7 @@
       const task = ev.target.parentElement;
       removeTaskFromList(task);
     }
+    setProgress();
   }, false);
+  // window.visualViewport.height
 }());
