@@ -69,5 +69,9 @@
       const task = ev.target.parentElement.parentElement;
       removeTaskFromList(task);
     }
+    if (ev.target.tagName === 'BUTTON') {
+      const task = ev.target.parentElement;
+      removeTaskFromList(task);
+    }
   }, false);
 }());
