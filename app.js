@@ -13,7 +13,7 @@ app.use(sassMiddleware({
   dest: path.join(__dirname),
   debug: true,
   // outputStyle: 'compressed',
-  indentedSyntax: true,
+  indentedSyntax: false,
   sourceMap: true,
 }));
 app.use('/public', express.static(path.join(__dirname, 'public')));
