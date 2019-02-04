@@ -54,12 +54,32 @@
     const progress = checkProgress();
     progressBar.style.width = `${progress}%`;
   }
+  function getTasksToSave() {
+    const tasks = document.querySelectorAll('li');
+    const tasksToSave = [];
+    let task;
+    let taskIsDone;
+    for (let i = 0; i < tasks.length; i += 1) {
+      task = tasks[i].firstElementChild.innerText;
+      taskIsDone = false;
+      if (tasks[i].firstElementChild.classList.value === 'checked') {
+        taskIsDone = true;
+      }
+      tasksToSave.push({ task, taskIsDone });
+    }
+    return tasksToSave;
+  }
+  function saveTaskList() {
+    const tasksToSave = getTasksToSave();
+    localStorage.setItem('task-list', JSON.stringify(tasksToSave));
+  }
   function addTask() {
     const { isTask, task } = checkTask();
     if (isTask === true) {
       addTaskToList(task);
       clearAddedTask();
       setProgress();
+      saveTaskList();
     }
   }
   document.querySelector('#button-add-task').addEventListener('click', addTask);
@@ -76,6 +96,7 @@
     setTimeout(() => {
       li.remove();
       setProgress();
+      saveTaskList();
     }, 600);
   }
   const taskList = document.querySelector('ul');
@@ -97,6 +118,36 @@
       removeTaskFromList(task);
     }
     setProgress();
+    saveTaskList();
   }, false);
+
+  function removeExamplesTasks() {
+    document.querySelectorAll('li').forEach((li) => {
+      li.remove();
+    });
+  }
+  function getLastAddedTask() {
+    const tasks = document.querySelectorAll('li');
+    const task = tasks[tasks.length - 1];
+    return task;
+  }
+  function retrieveTasksFromLocalStorage() {
+    const savedTasks = JSON.parse(localStorage.getItem('task-list'));
+    return savedTasks;
+  }
+  function updateTaksFromLocalStorage() {
+    const savedTasks = retrieveTasksFromLocalStorage();
+    for (let i = 0; i < savedTasks.length; i += 1) {
+      addTaskToList(savedTasks[i].task);
+      if (savedTasks[i].taskIsDone === true) {
+        getLastAddedTask().click();
+      }
+    }
+  }
+  function taskListIsOpen() {
+    removeExamplesTasks();
+    updateTaksFromLocalStorage();
+  }
+  taskListIsOpen();
   // window.visualViewport.height
 }());
