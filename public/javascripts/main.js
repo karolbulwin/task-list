@@ -19,26 +19,6 @@
 
     return li;
   }
-  function addTaskToList(task) {
-    const taskList = document.querySelector('ul');
-    const li = createHtmlElement(task);
-    taskList.append(li);
-    setTimeout(() => {
-      li.classList.remove('new-task');
-    }, 600);
-  }
-  function clearAddedTask() {
-    document.querySelector('#task').value = '';
-  }
-  function checkTask() {
-    let isTask = true;
-    let task = document.querySelector('#task').value;
-    task = task.trim();
-    if (task === '') {
-      isTask = false;
-    }
-    return { isTask, task };
-  }
   function checkProgress() {
     const tasks = document.querySelectorAll('li').length;
     const tasksDone = document.querySelectorAll('li.checked-bg');
@@ -73,16 +53,37 @@
     const tasksToSave = getTasksToSave();
     localStorage.setItem('task-list', JSON.stringify(tasksToSave));
   }
+  function addTaskToList(task) {
+    const taskList = document.querySelector('ul');
+    const li = createHtmlElement(task);
+    taskList.append(li);
+    setTimeout(() => {
+      li.classList.remove('new-task');
+      setProgress();
+      saveTaskList();
+    }, 600);
+  }
+  function clearAddedTask() {
+    document.querySelector('#task').value = '';
+  }
+  function checkTask() {
+    let isTask = true;
+    let task = document.querySelector('#task').value;
+    task = task.trim();
+    if (task === '') {
+      isTask = false;
+    }
+    return { isTask, task };
+  }
   function addTask() {
     const { isTask, task } = checkTask();
     if (isTask === true) {
       addTaskToList(task);
       clearAddedTask();
-      setProgress();
-      saveTaskList();
     }
   }
   document.querySelector('#button-add-task').addEventListener('click', addTask);
+
   function checkTheKey(e) {
     if (e.key === 'Enter') {
       addTask();
@@ -99,29 +100,32 @@
       saveTaskList();
     }, 600);
   }
-  const taskList = document.querySelector('ul');
-  taskList.addEventListener('click', (ev) => {
-    if (ev.target.tagName === 'LI') {
-      ev.target.classList.toggle('checked-bg');
-      ev.target.firstElementChild.classList.toggle('checked');
-    }
-    if (ev.target.tagName === 'P') {
-      ev.target.classList.toggle('checked');
-      ev.target.parentElement.classList.toggle('checked-bg');
-    }
-    if (ev.target.tagName === 'SPAN') {
-      const task = ev.target.parentElement.parentElement;
-      removeTaskFromList(task);
-    }
-    if (ev.target.tagName === 'BUTTON') {
-      const task = ev.target.parentElement;
-      removeTaskFromList(task);
-    }
-    setProgress();
-    saveTaskList();
-  }, false);
+  function addEventListenerForTasks() {
+    const taskList = document.querySelector('ul');
+    taskList.addEventListener('click', (ev) => {
+      if (ev.target.tagName === 'LI') {
+        ev.target.classList.toggle('checked-bg');
+        ev.target.firstElementChild.classList.toggle('checked');
+      }
+      if (ev.target.tagName === 'P') {
+        ev.target.classList.toggle('checked');
+        ev.target.parentElement.classList.toggle('checked-bg');
+      }
+      if (ev.target.tagName === 'SPAN') {
+        const task = ev.target.parentElement.parentElement;
+        removeTaskFromList(task);
+      }
+      if (ev.target.tagName === 'BUTTON') {
+        const task = ev.target.parentElement;
+        removeTaskFromList(task);
+      }
+      setProgress();
+      saveTaskList();
+    }, false);
+  }
+  addEventListenerForTasks();
 
-  function removeExamplesTasks() {
+  function removeAllTasks() {
     document.querySelectorAll('li').forEach((li) => {
       li.remove();
     });
@@ -144,9 +148,22 @@
       }
     }
   }
+  function addExampleTasks() {
+    const exampleTasks = [
+      'task 1',
+      'task 2',
+      'task 3'
+    ];
+    exampleTasks.forEach((task) => {
+      addTaskToList(task);
+    });
+  }
   function taskListIsOpen() {
-    removeExamplesTasks();
-    updateTaksFromLocalStorage();
+    if (localStorage.length === 0 || localStorage['task-list'].length === 2) {
+      addExampleTasks();
+    } else {
+      updateTaksFromLocalStorage();
+    }
   }
   taskListIsOpen();
   // window.visualViewport.height
