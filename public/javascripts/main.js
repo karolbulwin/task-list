@@ -197,6 +197,10 @@
       addTaskToList(task);
     });
   }
+  function addExampleTaskListTitle() {
+    const exampleTitle = 'Task list';
+    document.querySelector('#task-list-title').innerText = exampleTitle;
+  }
   function taskListIsOpen() {
     if (localStorage.length === 0 || localStorage['task-list'].length === 2) {
       addExampleTasks();
@@ -205,6 +209,8 @@
     }
     if (localStorage['task-list-title']) {
       setTitleFromLocalStorage();
+    } else {
+      addExampleTaskListTitle();
     }
   }
   taskListIsOpen();
