@@ -164,8 +164,10 @@
   }
   function renameTaksList() {
     const newTitle = getNewTitle();
-    document.querySelector('#task-list-title').innerText = newTitle;
-    saveTitleToLocalStorage();
+    if (newTitle !== '') {
+      document.querySelector('#task-list-title').innerText = newTitle;
+      saveTitleToLocalStorage();
+    }
   }
   document.querySelector('#bttn-change-title').addEventListener('click', renameTaksList);
 
