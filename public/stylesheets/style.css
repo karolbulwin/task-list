@@ -1,5 +1,13 @@
+header {
+  position: relative; }
+
 h1 {
   border-bottom: 4px solid black; }
+
+.setting-box {
+  position: absolute;
+  top: .4em;
+  right: .4em; }
 
 .progress {
   height: 0.5em; }

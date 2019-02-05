@@ -1,8 +1,18 @@
 @import 'colors';
 @import 'mixins';
 
+header {
+    position: relative;
+}
+
 h1 {
     border-bottom: 4px solid $main;
+}
+
+.setting-box {
+    position: absolute;
+    top: .4em;
+    right: .4em;
 }
 
 .progress {
