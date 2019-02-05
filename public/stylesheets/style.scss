@@ -7,7 +7,8 @@ header {
 
 h1 {
     border-bottom: 4px solid $main;
-    min-height: 1.4em
+    min-height: 2.5em;
+    word-break: break-word;
 }
 
 .setting-box {
@@ -17,6 +18,7 @@ h1 {
     button {
         width: 2.625em;
         height: 2.375em;
+        background-color: transparentize($main, $amount: .95);
     }
 }
 
@@ -30,6 +32,7 @@ ul > li {
     @include user-select;
     p {
         margin: 0;
+        word-break: break-word;
     }
     &.to-remove {
         opacity: 0;
@@ -46,5 +49,5 @@ ul > li {
 }
 
 .checked-bg {
-    background-color: lightgreen;
+    background-color: $doneTask;
 }

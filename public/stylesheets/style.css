@@ -3,7 +3,8 @@ header {
 
 h1 {
   border-bottom: 4px solid black;
-  min-height: 1.4em; }
+  min-height: 2.5em;
+  word-break: break-word; }
 
 .setting-box {
   position: absolute;
@@ -11,7 +12,8 @@ h1 {
   right: .4em; }
   .setting-box button {
     width: 2.625em;
-    height: 2.375em; }
+    height: 2.375em;
+    background-color: rgba(0, 0, 0, 0.05); }
 
 .progress {
   height: 0.5em; }
@@ -24,7 +26,8 @@ ul > li {
   -ms-user-select: none;
   user-select: none; }
   ul > li p {
-    margin: 0; }
+    margin: 0;
+    word-break: break-word; }
   ul > li.to-remove {
     opacity: 0; }
   ul > li.new-task {
