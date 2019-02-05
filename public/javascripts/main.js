@@ -126,10 +126,21 @@
   addEventListenerForTasks();
 
   function removeAllTasks() {
-    document.querySelectorAll('li').forEach((li) => {
-      li.remove();
+    document.querySelectorAll('#tasks-list li').forEach((li) => {
+      removeTaskFromList(li);
     });
   }
+  document.querySelector('#remove-all').addEventListener('click', removeAllTasks);
+  
+  function removeDoneTasks() {
+    document.querySelectorAll('#tasks-list li').forEach((li) => {
+      if (li.firstElementChild.classList.value === 'checked') {
+        removeTaskFromList(li);
+      }
+    });
+  }
+  document.querySelector('#remove-done').addEventListener('click', removeDoneTasks);
+
   function getLastAddedTask() {
     const tasks = document.querySelectorAll('li');
     const task = tasks[tasks.length - 1];
