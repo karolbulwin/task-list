@@ -19,18 +19,41 @@
   <header>
     <h1 class="text-center" id="task-list-title">Task list</h1>
     <div class="btn-group dropleft setting-box">
-      <button type="button" class="btn btn-secondary" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <button type="button" class="btn btn-secondary rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         <i class="fas fa-cog" aria-hidden="true"></i>
       </button>
       <div class="dropdown-menu">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item" id="change-title">Change task list title</li>
+          <li class="list-group-item" id="change-title" data-toggle="modal" data-target="#change-task-list-title">Change task list title</li>
           <li class="list-group-item" id="remove-all">Remove all tasks</li>
           <li class="list-group-item" id="remove-done">Remove done tasks</li>
         </ul>
       </div>
     </div>
   </header>
+  <div class="modal fade" id="change-task-list-title" tabindex="-1" role="dialog" aria-labelledby="changing-title" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="changing-title">Type new title for Your task list</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="new-title"></label>
+              <input type="text" class="form-control" name="new-title" id="new-title" aria-describedby="helpId" placeholder="Type new title here...">
+              <small id="helpId" class="form-text text-muted">Help text</small>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" id="bttn-change-title" data-dismiss="modal">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
   <div class="container">
     <div class="input-group mb-3">
       <input type="text" class="form-control" name="task" id="task" placeholder="Type your task here..." aria-label="Type your task here"
