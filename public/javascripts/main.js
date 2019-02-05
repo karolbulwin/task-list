@@ -35,7 +35,7 @@
     progressBar.style.width = `${progress}%`;
   }
   function getTasksToSave() {
-    const tasks = document.querySelectorAll('li');
+    const tasks = document.querySelectorAll('#tasks-list li');
     const tasksToSave = [];
     let task;
     let taskIsDone;
@@ -54,7 +54,7 @@
     localStorage.setItem('task-list', JSON.stringify(tasksToSave));
   }
   function addTaskToList(task) {
-    const taskList = document.querySelector('ul');
+    const taskList = document.querySelector('#tasks-list');
     const li = createHtmlElement(task);
     taskList.append(li);
     setTimeout(() => {
@@ -101,7 +101,7 @@
     }, 600);
   }
   function addEventListenerForTasks() {
-    const taskList = document.querySelector('ul');
+    const taskList = document.querySelector('#tasks-list');
     taskList.addEventListener('click', (ev) => {
       if (ev.target.tagName === 'LI') {
         ev.target.classList.toggle('checked-bg');
