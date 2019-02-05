@@ -141,6 +141,22 @@
   }
   document.querySelector('#remove-done').addEventListener('click', removeDoneTasks);
 
+  function getTaskListTitleToSave() {
+    const taskListTitle = document.querySelector('#task-list-title').innerText;
+    return taskListTitle;
+  }
+  function saveTitleToLocalStorage() {
+    const taskListTitle = getTaskListTitleToSave();
+    localStorage.setItem('task-list-title', JSON.stringify(taskListTitle));
+  }
+  function retrieveTitleFromLocalStorage() {
+    const taskListTitle = JSON.parse(localStorage.getItem('task-list-title'));
+    return taskListTitle;
+  }
+  function setTitleFromLocalStorage() {
+    const taskListTitle = retrieveTitleFromLocalStorage();
+    document.querySelector('#task-list-title').innerText = taskListTitle;
+  }
   function getNewTitle() {
     let newTitle = document.querySelector('#new-title').value;
     newTitle = newTitle.trim();
@@ -149,6 +165,7 @@
   function renameTaksList() {
     const newTitle = getNewTitle();
     document.querySelector('#task-list-title').innerText = newTitle;
+    saveTitleToLocalStorage();
   }
   document.querySelector('#bttn-change-title').addEventListener('click', renameTaksList);
 
@@ -185,6 +202,9 @@
       addExampleTasks();
     } else {
       updateTaksFromLocalStorage();
+    }
+    if (localStorage['task-list-title']) {
+      setTitleFromLocalStorage();
     }
   }
   taskListIsOpen();
