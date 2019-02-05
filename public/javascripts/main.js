@@ -20,8 +20,8 @@
     return li;
   }
   function checkProgress() {
-    const tasks = document.querySelectorAll('li').length;
-    const tasksDone = document.querySelectorAll('li.checked-bg');
+    const tasks = document.querySelectorAll('#tasks-list li').length;
+    const tasksDone = document.querySelectorAll('#tasks-list li.checked-bg');
     const progressMax = 100; // 8
     let progressNow = 0;
     if (tasksDone !== null) {
