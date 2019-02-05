@@ -131,7 +131,7 @@
     });
   }
   document.querySelector('#remove-all').addEventListener('click', removeAllTasks);
-  
+
   function removeDoneTasks() {
     document.querySelectorAll('#tasks-list li').forEach((li) => {
       if (li.firstElementChild.classList.value === 'checked') {
@@ -140,6 +140,17 @@
     });
   }
   document.querySelector('#remove-done').addEventListener('click', removeDoneTasks);
+
+  function getNewTitle() {
+    let newTitle = document.querySelector('#new-title').value;
+    newTitle = newTitle.trim();
+    return newTitle;
+  }
+  function renameTaksList() {
+    const newTitle = getNewTitle();
+    document.querySelector('#task-list-title').innerText = newTitle;
+  }
+  document.querySelector('#bttn-change-title').addEventListener('click', renameTaksList);
 
   function getLastAddedTask() {
     const tasks = document.querySelectorAll('li');
