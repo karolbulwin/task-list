@@ -255,5 +255,12 @@
   }
   document.querySelector('#save-tasks').addEventListener('click', saveTaskListToFile);
 
+  function resetAll() {
+    removeAllTasks();
+    addExampleTaskListTitle();
+    localStorage.clear();
+    taskListIsOpen();
+  }
+  document.querySelector('#reset-all').addEventListener('click', resetAll);
   // window.visualViewport.height
 }());
