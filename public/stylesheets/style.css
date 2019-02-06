@@ -17,6 +17,8 @@ h1 {
     width: 2.625em;
     height: 2.375em;
     background-color: rgba(0, 0, 0, 0.05); }
+  .setting-box ul {
+    text-align: center; }
 
 .progress {
   height: 0.5em; }

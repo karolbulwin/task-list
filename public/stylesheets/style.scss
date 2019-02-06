@@ -24,6 +24,9 @@ h1 {
         height: 2.375em;
         background-color: transparentize($main, $amount: .95);
     }
+    ul {
+        text-align: center;
+    }
 }
 
 .progress {
