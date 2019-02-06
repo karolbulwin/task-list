@@ -31,6 +31,20 @@ h1 {
         padding: 0;
     }
 }
+.error {
+    position: absolute;
+    display: none;
+    z-index: 1000;
+    width: 100%;
+    height: 5em;
+    text-align: center;
+    background-color: lighten($main, $amount: 95%);
+    padding: 1.5em;
+}
+
+.show {
+    display: inline;
+}
 
 .progress {
     height: 0.5em;
