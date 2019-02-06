@@ -239,6 +239,7 @@
       };
       const load = function loadTaskListFromFile() {
         const oFile = document.getElementById('files').files[0];
+        oFReader.readAsText(oFile); // samsung browser
         if (oFile.type === rFilter) {
           oFReader.readAsText(oFile);
         } else {
