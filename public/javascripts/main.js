@@ -219,7 +219,7 @@
   taskListIsOpen();
 
   function loadTasksFromFile() {
-    if (window.FileReader) {
+    if (window.File && window.FileReader && window.FileList && window.Blob) {
       const oFReader = new FileReader();
       const rFilter = 'application/json';
 
