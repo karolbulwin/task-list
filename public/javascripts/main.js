@@ -219,30 +219,43 @@
   taskListIsOpen();
 
   function loadTasksFromFile() {
-    const oFReader = new FileReader();
-    const rFilter = 'application/json';
+    if (window.FileReader) {
+      const oFReader = new FileReader();
+      const rFilter = 'application/json';
 
-    oFReader.onload = (oFREvent) => {
-      const taskList = oFREvent.target.result;
-      const splitedTaskList = taskList.split(']');
-      splitedTaskList[0] += ']';
+      oFReader.onload = (oFREvent) => {
+        const taskList = oFREvent.target.result;
+        const splitedTaskList = taskList.split(']');
+        splitedTaskList[0] += ']';
 
-      (async function setLocalSotrage() {
-        await localStorage.clear();
-        await localStorage.setItem('task-list', splitedTaskList[0]);
-        await localStorage.setItem('task-list-title', splitedTaskList[1]);
-        // location.reload()
-        await removeAllTasks();
-        await taskListIsOpen();
-      }());
-    };
-    function loadTaskListFromFile() {
-      const oFile = document.getElementById('files').files[0];
-      if (oFile.type === rFilter) {
-        oFReader.readAsText(oFile);
-      }
+        (async function setLocalSotrage() {
+          await localStorage.clear();
+          await localStorage.setItem('task-list', splitedTaskList[0]);
+          await localStorage.setItem('task-list-title', splitedTaskList[1]);
+          // location.reload()
+          await removeAllTasks();
+          await taskListIsOpen();
+        }());
+      };
+      const load = function loadTaskListFromFile() {
+        const oFile = document.getElementById('files').files[0];
+        if (oFile.type === rFilter) {
+          oFReader.readAsText(oFile);
+        } else {
+          document.querySelector('.error').innerText = 'Error: Incorrect file!';
+          document.querySelector('.error').classList.add('show');
+          setTimeout(() => {
+            document.querySelector('.error').classList.remove('show');
+          }, 3000);
+        }
+      };
+      document.querySelector('#upload-tasks').addEventListener('click', load);
+    } else {
+      document.querySelector('.error').innerText = 'Error: The browser doesn\'t support the FileReader Object!';
+      setTimeout(() => {
+        document.querySelector('.error').classList.remove('show');
+      }, 3000);
     }
-    document.querySelector('#upload-tasks').addEventListener('click', loadTaskListFromFile);
   }
   loadTasksFromFile();
 
