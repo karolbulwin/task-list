@@ -146,7 +146,8 @@
     return taskListTitle;
   }
   function saveTitleToLocalStorage() {
-    const taskListTitle = getTaskListTitleToSave();
+    let taskListTitle = getTaskListTitleToSave();
+    taskListTitle = { title: taskListTitle };
     localStorage.setItem('task-list-title', JSON.stringify(taskListTitle));
   }
   function retrieveTitleFromLocalStorage() {
@@ -155,7 +156,7 @@
   }
   function setTitleFromLocalStorage() {
     const taskListTitle = retrieveTitleFromLocalStorage();
-    document.querySelector('#task-list-title').innerText = taskListTitle;
+    document.querySelector('#task-list-title').innerText = taskListTitle.title;
   }
   function getNewTitle() {
     let newTitle = document.querySelector('#new-title').value;
@@ -216,5 +217,43 @@
     }
   }
   taskListIsOpen();
+
+  function loadTasksFromFile() {
+    const oFReader = new FileReader();
+    const rFilter = 'application/json';
+
+    oFReader.onload = (oFREvent) => {
+      const taskList = oFREvent.target.result;
+      const splitedTaskList = taskList.split(']');
+      splitedTaskList[0] += ']';
+
+      (async function setLocalSotrage() {
+        await localStorage.clear();
+        await localStorage.setItem('task-list', splitedTaskList[0]);
+        await localStorage.setItem('task-list-title', splitedTaskList[1]);
+        // location.reload()
+        await removeAllTasks();
+        await taskListIsOpen();
+      }());
+    };
+    function loadTaskListFromFile() {
+      const oFile = document.getElementById('files').files[0];
+      if (oFile.type === rFilter) {
+        oFReader.readAsText(oFile);
+      }
+    }
+    document.querySelector('#upload-tasks').addEventListener('click', loadTaskListFromFile);
+  }
+  loadTasksFromFile();
+
+  function saveTaskListToFile() {
+    const a = document.createElement('a');
+    const blob = new Blob([localStorage.getItem('task-list'), localStorage.getItem('task-list-title')], { type: 'application/json' });
+    a.href = URL.createObjectURL(blob);
+    a.download = 'task-list.json';
+    a.click();
+  }
+  document.querySelector('#save-tasks').addEventListener('click', saveTaskListToFile);
+
   // window.visualViewport.height
 }());
