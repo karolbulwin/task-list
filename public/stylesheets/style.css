@@ -19,6 +19,8 @@ h1 {
     background-color: rgba(0, 0, 0, 0.05); }
   .setting-box ul {
     text-align: center; }
+  .setting-box div.dropdown-menu {
+    padding: 0; }
 
 .progress {
   height: 0.5em; }
