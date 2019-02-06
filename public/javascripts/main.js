@@ -252,6 +252,7 @@
       document.querySelector('#upload-tasks').addEventListener('click', load);
     } else {
       document.querySelector('.error').innerText = 'Error: The browser doesn\'t support the FileReader Object!';
+      document.querySelector('.error').classList.add('show');
       setTimeout(() => {
         document.querySelector('.error').classList.remove('show');
       }, 3000);
