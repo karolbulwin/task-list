@@ -4,6 +4,7 @@ module.exports = {
         "browser": true,
     },
     "rules": {
-        "comma-dangle": ["error", "never"]
+        "comma-dangle": ["error", "never"],
+        'no-console': 'off',
     }
 };
