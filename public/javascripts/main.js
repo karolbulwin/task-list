@@ -214,6 +214,7 @@
       setTitleFromLocalStorage();
     } else {
       addExampleTaskListTitle();
+      saveTitleToLocalStorage();
     }
   }
   taskListIsOpen();
