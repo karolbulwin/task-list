@@ -13,6 +13,7 @@ h1 {
     border-bottom: 4px solid $main;
     min-height: 2.5em;
     word-break: break-word;
+    text-shadow: 1.5px 1.3px 4px rgba(0,0,0,.3);
 }
 
 .setting-box {
@@ -46,8 +47,17 @@ h1 {
     display: inline;
 }
 
+input[type=text] {
+    @include boxshadowInset;
+}
+
 .progress {
     height: 0.5em;
+    @include boxshadowInset;
+
+}
+.btn:not(:disabled):not(.disabled) {
+    @include boxshadow;
 }
 
 ul > li {

@@ -4,3 +4,13 @@
      -ms-user-select: none;
          user-select: none;
 }
+
+@mixin boxshadow($horizontal: 0em, $vertical: 0em, $blur: 0.1125em, $spread: 0.025em, $color: rgba(0, 0, 0, 0.3)) {
+    -webkit-box-shadow: $horizontal $vertical $blur $spread $color;
+    box-shadow: $horizontal $vertical $blur $spread $color;
+}
+
+@mixin boxshadowInset($horizontal: 0.0275em, $vertical: 0.0325em, $blur: 0.4125em, $spread: -0.045em, $color: rgba(0, 0, 0, 0.3)) {
+    -webkit-box-shadow: inset $horizontal $vertical $blur $spread $color;
+    box-shadow: inset $horizontal $vertical $blur $spread $color;
+}
