@@ -1,7 +1,7 @@
 const CACHE_NAME = 'task-list-cache-v1';
 const urlsToCache = [
   '/',
-  'index.html',
+  'tasks.html',
   'favicon.ico',
   'public/stylesheets/style.css',
   'public/javascripts/main.js',
