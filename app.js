@@ -17,10 +17,10 @@ app.use(sassMiddleware({
   sourceMap: true
 }));
 app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use(express.static('views'));
+app.use(express.static('/'));
 
 app.get('/', (req, res) => {
-  res.sendFile('/views/', 'index.html');
+  res.sendFile(path.resolve('tasks.html'));
 });
 
 app.listen(port, () => {
