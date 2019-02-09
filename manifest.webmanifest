@@ -23,7 +23,8 @@
     "src": "public/images/icons/tasks-512x512.png",
     "sizes": "512x512"
   }],
-  "start_url": "/task-list/",
+  "start_url": "/task-list/index.html",
+  "scope": "/task-list/",
   "display": "fullscreen",
   "theme_color": "#ffffe0",
   "background_color": "#ffffe0"
