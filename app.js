@@ -14,7 +14,7 @@ app.use(sassMiddleware({
   debug: true,
   // outputStyle: 'compressed',
   indentedSyntax: false,
-  sourceMap: true,
+  sourceMap: true
 }));
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use(express.static('views'));
