@@ -34,37 +34,50 @@ self.addEventListener('activate', (event) => {
     ))
   );
 });
-
+/*
 self.addEventListener('fetch', (event) => {
-  event.respondWith(
-    caches.match(event.request)
-      .then((response) => {
-        // Cache hit - return response
-        if (response) {
-          return response;
-        }
+ event.respondWith(
+   caches.match(event.request)
+     .then((response) => {
+       // Cache hit - return response
+       if (response) {
+         return response;
+       }
 
-        return fetch(event.request).then(
-          (res) => {
-            // Check if we received a valid response
-            if (!res || res.status !== 200 || res.type !== 'basic') {
-              return res;
-            }
+       return fetch(event.request).then(
+         (res) => {
+           // Check if we received a valid response
+           if (!res || res.status !== 200 || res.type !== 'basic') {
+             return res;
+           }
 
-            // IMPORTANT: Clone the response. A response is a stream
-            // and because we want the browser to consume the response
-            // as well as the cache consuming the response, we need
-            // to clone it so we have two streams.
-            const responseToCache = res.clone();
+           // IMPORTANT: Clone the response. A response is a stream
+           // and because we want the browser to consume the response
+           // as well as the cache consuming the response, we need
+           // to clone it so we have two streams.
+           const responseToCache = res.clone();
 
-            caches.open(CACHE_NAME)
-              .then((cache) => {
-                cache.put(event.request, responseToCache);
-              });
+           caches.open(CACHE_NAME)
+             .then((cache) => {
+               cache.put(event.request, responseToCache);
+             });
 
-            return response;
-          }
-        );
-      })
-  );
+           return response;
+         }
+       );
+     })
+ );
+});
+*/
+
+addEventListener('fetch', (event) => {
+  // Prevent the default, and handle the request ourselves.
+  event.respondWith(async function fetch() {
+    // Try to get the response from a cache.
+    const cachedResponse = await caches.match(event.request);
+    // Return it if we found one.
+    if (cachedResponse) return cachedResponse;
+    // If we didn't find a match in the cache, use the network.
+    return fetch(event.request);
+  }());
 });
