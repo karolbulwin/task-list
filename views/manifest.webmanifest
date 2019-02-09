@@ -1,0 +1,30 @@
+{
+  "lang": "en",
+  "dir": "ltr",
+  "name": "Task list",
+  "description": "Task list for better organization and increased productivity! Great for shopping!",
+  "short_name": "Tasks",
+  "icons": [{
+    "src": "public/images/icons/tasks-16x16.png",
+    "sizes": "16x16"
+  }, {
+    "src": "public/images/icons/tasks-64x64.png",
+    "sizes": "64x64"
+  }, {
+    "src": "public/images/icons/tasks-128x128.png",
+    "sizes": "128x128"
+  }, {
+    "src": "public/images/icons/tasks-144x144.png",
+    "sizes": "144x144"
+  }, {
+    "src": "public/images/icons/tasks-192x192.png",
+    "sizes": "192x192"
+  }, {
+    "src": "public/images/icons/tasks-512x512.png",
+    "sizes": "512x512"
+  }],
+  "start_url": "index.html",
+  "display": "fullscreen",
+  "theme_color": "#ffffe0",
+  "background_color": "#ffffe0"
+}
