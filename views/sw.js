@@ -2,9 +2,9 @@ const CACHE_NAME = 'task-list-cache-v1';
 const urlsToCache = [
   '/',
   '/index.html',
-  '/public/stylesheets/style.css',
-  '/public/javascripts/main.js',
-  '/public/javascripts/for-sw.js'
+  '../public/stylesheets/style.css',
+  '../public/javascripts/main.js',
+  '../public/javascripts/for-sw.js'
 ];
 
 self.addEventListener('install', (event) => {
