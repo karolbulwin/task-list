@@ -23,7 +23,7 @@
     "src": "public/images/icons/tasks-512x512.png",
     "sizes": "512x512"
   }],
-  "start_url": "index.html",
+  "start_url": "/",
   "display": "fullscreen",
   "theme_color": "#ffffe0",
   "background_color": "#ffffe0"
