@@ -12,9 +12,13 @@ header {
 
 h1 {
     border-bottom: 4px solid $main;
-    min-height: 2.5em;
+    min-height: 1.9em;
     word-break: break-word;
     text-shadow: 1.5px 1.3px 4px rgba(0,0,0,.3);
+}
+
+.navbar-collapse {
+    @include boxshadow($blur: 0.5125em, $spread: 0.125em);
 }
 
 .setting-box {
@@ -65,6 +69,7 @@ ul > li {
     -webkit-transition-duration: 600ms;
             transition-duration: 600ms;
     @include user-select;
+    text-align: center;
     p {
         margin: 0;
         word-break: break-word;
