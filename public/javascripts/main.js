@@ -125,10 +125,15 @@
   }
   addEventListenerForTasks();
 
+  function closeMenuSettings() {
+    document.querySelector('button').click();
+  }
+
   function removeAllTasks() {
     document.querySelectorAll('#tasks-list li').forEach((li) => {
       removeTaskFromList(li);
     });
+    closeMenuSettings();
   }
   document.querySelector('#remove-all').addEventListener('click', removeAllTasks);
 
@@ -138,6 +143,7 @@
         removeTaskFromList(li);
       }
     });
+    closeMenuSettings();
   }
   document.querySelector('#remove-done').addEventListener('click', removeDoneTasks);
 
@@ -169,6 +175,7 @@
       document.querySelector('#task-list-title').innerText = newTitle;
       saveTitleToLocalStorage();
     }
+    closeMenuSettings();
   }
   document.querySelector('#bttn-change-title').addEventListener('click', renameTaksList);
 
@@ -249,6 +256,7 @@
             document.querySelector('.error').classList.remove('show');
           }, 3000);
         }
+        closeMenuSettings();
       };
       document.querySelector('#upload-tasks').addEventListener('click', load);
     } else {
@@ -267,6 +275,7 @@
     a.href = URL.createObjectURL(blob);
     a.download = 'task-list.json';
     a.click();
+    closeMenuSettings();
   }
   document.querySelector('#save-tasks').addEventListener('click', saveTaskListToFile);
 
@@ -275,6 +284,7 @@
     addExampleTaskListTitle();
     localStorage.clear();
     taskListIsOpen();
+    closeMenuSettings();
   }
   document.querySelector('#reset-all').addEventListener('click', resetAll);
   // window.visualViewport.height
