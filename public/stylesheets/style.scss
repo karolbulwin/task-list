@@ -17,6 +17,18 @@ h1 {
     text-shadow: 1.5px 1.3px 4px rgba(0,0,0,.3);
 }
 
+.navbar {
+    position: absolute;
+    top: 0.4em;
+    right: 0;
+    z-index: 4;
+    button {
+        width: 2.625em;
+        height: 2.375em;
+        background-color: transparentize($main, $amount: .95);
+    }
+}
+
 .navbar-collapse {
     @include boxshadow($blur: 0.5125em, $spread: 0.125em);
 }
