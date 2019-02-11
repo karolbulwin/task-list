@@ -22,10 +22,15 @@ h1 {
     top: 0.4em;
     right: 0;
     z-index: 4;
-    button {
+    button:first {
         width: 2.625em;
         height: 2.375em;
         background-color: transparentize($main, $amount: .95);
+    }
+    span#current-title {
+        padding: 0.4em;
+        width: 7em;
+        overflow: auto;
     }
 }
 

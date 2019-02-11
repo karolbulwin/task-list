@@ -53,6 +53,9 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item nav-link" id="change-title" data-toggle="modal" data-target="#change-task-list-title">
             Change task list title</li>
+          <li class="nav-item nav-link d-flex" id="change-task-list"><button type="button" class="btn btn-secondary"><i
+                class="fas fa-angle-left"></i></button><span id="current-title" class="flex-grow-1">title0</span><button type="button"
+              class="btn btn-secondary"><i class="fas fa-angle-right"></i></button></li>
           <li class="nav-item nav-link" id="remove-all">Remove all tasks</li>
           <li class="nav-item nav-link text-success" id="remove-done">Remove done tasks</li>
           <li class="nav-item nav-link" data-toggle="modal" data-target="#uploadFile">Upload Task List from
@@ -63,10 +66,7 @@
         </ul>
       </div>
     </nav>
-
-    <h1 class="text-center py-4 px-2" id="task-list-title"></h1>
-
-<!--<div class="btn-group dropleft setting-box">
+    <!--<div class="btn-group dropleft setting-box">
       <button type="button" class="btn rounded" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
         aria-label="Settings">
         <i class="fas fa-cog" aria-hidden="true"></i>
@@ -85,8 +85,10 @@
         </ul>
       </div>
     </div>-->
-    
+
   </header>
+
+  <h1 class="text-center py-4 px-2" id="task-list-title"></h1>
 
   <div class="alert alert-danger error" role="alert"></div>
 
