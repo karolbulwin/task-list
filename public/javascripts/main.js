@@ -80,8 +80,7 @@
     const taskListTitle = getTaskListTitle();
     localStorage.setItem('current-task-list', JSON.stringify(taskListTitle));
   }
-  function saveNewTitleListToLocalStorage() {
-    const newTitle = getTaskListTitle();
+  function saveNewTitleListToLocalStorage(newTitle = getTaskListTitle()) {
     const taskListsTitles = getTaskListsTitles();
     taskListsTitles.push(newTitle);
     localStorage.setItem('task-lists-titles', JSON.stringify(taskListsTitles));
@@ -395,9 +394,9 @@
       saveNewTitleListToLocalStorage();
       saveTaskList();
       updateShowTaskListTitles();
-    } else {
+    } /* else {
       console.log('tttt');
-    }
+     } */
     closeMenuSettings();
   }
   document.querySelector('#bttn-change-title').addEventListener('click', renameTaksList);
@@ -417,6 +416,7 @@
           await clearTaskList();
           await localStorage.setItem('current-task-list', JSON.stringify(taskListTitle));
           await localStorage.setItem(taskListTitle, tasks);
+          await saveNewTitleListToLocalStorage(taskListTitle);
           await taskListIsOpen();
         }());
       };
