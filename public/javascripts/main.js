@@ -22,10 +22,13 @@
   function checkProgress() {
     const tasks = document.querySelectorAll('#tasks-list li').length;
     const tasksDone = document.querySelectorAll('#tasks-list li.checked-bg');
-    const progressMax = 100; // 8
+    const progressMax = 100;
     let progressNow = 0;
     if (tasksDone !== null) {
       progressNow = tasksDone.length * progressMax / tasks;
+      if (Number.isNaN(progressNow) === true) {
+        progressNow = 0;
+      }
     }
     return progressNow;
   }
@@ -49,9 +52,43 @@
     }
     return tasksToSave;
   }
+  function getTaskListsTitles() {
+    let taskListsTitles = JSON.parse(localStorage.getItem('task-lists-titles'));
+    if (taskListsTitles === null) {
+      taskListsTitles = [];
+      localStorage.setItem('task-lists-titles', JSON.stringify(taskListsTitles));
+    }
+    return taskListsTitles;
+  }
+  function noRepeatedTaskListTitle(taskListTitle) {
+    const taskListsTitles = getTaskListsTitles();
+    let noOnTheList = true;
+    if (taskListsTitles.length > 2) {
+      taskListsTitles.forEach((title) => {
+        if (taskListTitle === title) {
+          noOnTheList = false;
+        }
+      });
+    }
+    return noOnTheList;
+  }
+  function getTaskListTitle() {
+    const taskListTitle = document.querySelector('#task-list-title').innerText;
+    return taskListTitle;
+  }
+  function saveCurrentTaskListToLocalStorage() {
+    const taskListTitle = getTaskListTitle();
+    localStorage.setItem('current-task-list', JSON.stringify(taskListTitle));
+  }
+  function saveNewTitleListToLocalStorage(newTitle = getTaskListTitle()) {
+    const taskListsTitles = getTaskListsTitles();
+    taskListsTitles.push(newTitle);
+    localStorage.setItem('task-lists-titles', JSON.stringify(taskListsTitles));
+  }
   function saveTaskList() {
     const tasksToSave = getTasksToSave();
-    localStorage.setItem('task-list', JSON.stringify(tasksToSave));
+    const taskListTitle = getTaskListTitle();
+    localStorage.setItem(taskListTitle, JSON.stringify(tasksToSave));
   }
   function addTaskToList(task) {
     const taskList = document.querySelector('#tasks-list');
@@ -147,37 +184,91 @@
   }
   document.querySelector('#remove-done').addEventListener('click', removeDoneTasks);
 
-  function getTaskListTitleToSave() {
-    const taskListTitle = document.querySelector('#task-list-title').innerText;
-    return taskListTitle;
-  }
-  function saveTitleToLocalStorage() {
-    let taskListTitle = getTaskListTitleToSave();
-    taskListTitle = { title: taskListTitle };
-    localStorage.setItem('task-list-title', JSON.stringify(taskListTitle));
-  }
   function retrieveTitleFromLocalStorage() {
-    const taskListTitle = JSON.parse(localStorage.getItem('task-list-title'));
+    const taskListTitle = JSON.parse(localStorage.getItem('current-task-list'));
     return taskListTitle;
   }
   function setTitleFromLocalStorage() {
     const taskListTitle = retrieveTitleFromLocalStorage();
-    document.querySelector('#task-list-title').innerText = taskListTitle.title;
+    document.querySelector('#task-list-title').innerText = taskListTitle;
+  }
+  function getChangedTitle() {
+    let changedTitle = document.querySelector('#changed-title').value;
+    changedTitle = changedTitle.trim();
+    return changedTitle;
   }
   function getNewTitle() {
     let newTitle = document.querySelector('#new-title').value;
     newTitle = newTitle.trim();
     return newTitle;
   }
-  function renameTaksList() {
-    const newTitle = getNewTitle();
-    if (newTitle !== '') {
-      document.querySelector('#task-list-title').innerText = newTitle;
-      saveTitleToLocalStorage();
+  function isTitleCorrect(title) {
+    let isCorrect = false;
+    if (title !== '') {
+      if (noRepeatedTaskListTitle(title) === true) {
+        isCorrect = true;
+      }
     }
-    closeMenuSettings();
+    return isCorrect;
   }
-  document.querySelector('#bttn-change-title').addEventListener('click', renameTaksList);
+  function clearInput(id) {
+    document.querySelector(id).value = '';
+  }
+  function createHtmlElementToSeparateAddNewTaskList() {
+    const div = document.createElement('div');
+    div.classList.add('dropdown-divider');
+    return div;
+  }
+  function createHtmlElementForTaskListsTitles(task) {
+    const li = document.createElement('li');
+    li.innerText = task;
+    li.classList.add('dropdown-item', 'task-list-title'); //
+    return li;
+  }
+  function showTaskListsTitles() {
+    const taskListsTitles = getTaskListsTitles();
+    const taskList = document.querySelector('.dropdown-menu');
+
+    taskListsTitles.forEach((title) => {
+      const li = createHtmlElementForTaskListsTitles(title);
+      taskList.append(li);
+    });
+    const div = createHtmlElementToSeparateAddNewTaskList();
+    const createTaskList = createHtmlElementForTaskListsTitles('Create new Task List');
+    const changeTitle = createHtmlElementForTaskListsTitles('Change task list title');
+    createTaskList.setAttribute('data-toggle', 'modal');
+    createTaskList.setAttribute('data-target', '#create-new-task-list');
+    changeTitle.setAttribute('id', 'change-title');
+    changeTitle.setAttribute('data-toggle', 'modal');
+    changeTitle.setAttribute('data-target', '#change-task-list-title');
+
+    taskList.append(div);
+    taskList.append(changeTitle);
+    taskList.append(createTaskList);
+  }
+  function updateShowTaskListTitles() {
+    document.querySelectorAll('.dropdown-menu li').forEach((li) => { li.remove(); });
+    document.querySelector('.dropdown-menu div').remove();
+    showTaskListsTitles();
+  }
+  function createNewTaskList() {
+    const newTitle = getNewTitle();
+    if (isTitleCorrect(newTitle)) {
+      document.querySelector('#task-list-title').innerText = newTitle;
+      clearInput('#new-title');
+      saveCurrentTaskListToLocalStorage();
+      saveNewTitleListToLocalStorage();
+      removeAllTasks();
+      saveTaskList();
+      updateShowTaskListTitles();
+    }
+  }
+  document.querySelector('#create-new-task-list-bttn').addEventListener('click', createNewTaskList);
+
+  function removeTaskListFromLocalStorage(taskListTitle) {
+    localStorage.removeItem(taskListTitle);
+  }
+
 
   function getLastAddedTask() {
     const tasks = document.querySelectorAll('li');
@@ -185,10 +276,11 @@
     return task;
   }
   function retrieveTasksFromLocalStorage() {
-    const savedTasks = JSON.parse(localStorage.getItem('task-list'));
+    const curretTaskListTitle = JSON.parse(localStorage.getItem('current-task-list'));
+    const savedTasks = JSON.parse(localStorage.getItem(curretTaskListTitle));
     return savedTasks;
   }
-  function updateTaksFromLocalStorage() {
+  function updateTasksFromLocalStorage() {
     const savedTasks = retrieveTasksFromLocalStorage();
     for (let i = 0; i < savedTasks.length; i += 1) {
       addTaskToList(savedTasks[i].task);
@@ -196,6 +288,9 @@
         getLastAddedTask().click();
       }
     }
+    setTimeout(() => {
+      setProgress();// for empty tasks list
+    }, 100);
   }
   function addExampleTasks() {
     const exampleTasks = [
@@ -207,24 +302,104 @@
       addTaskToList(task);
     });
   }
-  function addExampleTaskListTitle() {
-    const exampleTitle = 'Task list';
-    document.querySelector('#task-list-title').innerText = exampleTitle;
+  function addExampleTaskListTitle(title = 'Task list') {
+    document.querySelector('#task-list-title').innerText = title;
+  }
+  function initializeTaskList() {
+    addExampleTasks();
+    addExampleTaskListTitle();
+    saveCurrentTaskListToLocalStorage();
+    saveNewTitleListToLocalStorage();
+  }
+  function clearTaskList() {
+    document.querySelectorAll('#tasks-list li').forEach((li) => {
+      li.classList.add('to-remove');
+      setTimeout(() => {
+        li.remove();
+      }, 50);
+    });
+  }
+  function setCurrentTaskListTite(title) {
+    localStorage.setItem('current-task-list', JSON.stringify(title));
   }
   function taskListIsOpen() {
-    if (localStorage.length === 0 || localStorage['task-list'].length === 2) {
-      addExampleTasks();
-    } else {
-      updateTaksFromLocalStorage();
-    }
-    if (localStorage['task-list-title']) {
+    if (localStorage['current-task-list']) {
       setTitleFromLocalStorage();
+      updateTasksFromLocalStorage();
+      // setProgress();// for empty tasks list
     } else {
-      addExampleTaskListTitle();
-      saveTitleToLocalStorage();
+      initializeTaskList();
     }
+    updateShowTaskListTitles();
   }
   taskListIsOpen();
+
+  function switchBetweenTaskLists(title) {
+    clearTaskList();
+    setCurrentTaskListTite(title);
+    taskListIsOpen();
+  }
+  function changeCurrentTaskListTitle() {
+    const taskListsTitles = document.querySelector('.dropdown-menu');
+    taskListsTitles.addEventListener('click', (ev) => {
+      if (ev.target.tagName === 'LI' && ev.target.innerText !== 'Create new Task List'
+      && ev.target.innerText !== 'Change task list title') {
+        switchBetweenTaskLists(ev.target.innerText);
+      }
+    }, false);
+  }
+  changeCurrentTaskListTitle();
+  function changeCurrentTaskList() {
+    const taskListsTitles = getTaskListsTitles();
+    let titleToSet;
+    if (taskListsTitles.length > 0) {
+      titleToSet = taskListsTitles[taskListsTitles.length - 1];
+      // setCurrentTaskListTite(titleToSet);
+      switchBetweenTaskLists(titleToSet);
+    } else {
+      clearTaskList();
+      initializeTaskList();
+    }
+  }
+
+  function removeTaskListTitleFromLocalStorage(taskTitle) {
+    const taskListsTitles = getTaskListsTitles();
+    const newTaskListsTitles = [];
+    taskListsTitles.forEach((title) => {
+      if (taskTitle !== title) {
+        newTaskListsTitles.push(title);
+      }
+    });
+    localStorage.setItem('task-lists-titles', JSON.stringify(newTaskListsTitles));
+  }
+  function deleteCurrentTaskList() {
+    const currentTaskList = getTaskListTitle();
+    removeTaskListFromLocalStorage(currentTaskList);
+    removeTaskListTitleFromLocalStorage(currentTaskList);
+    changeCurrentTaskList();
+    updateShowTaskListTitles();
+  }
+  document.querySelector('#delete-task-list').addEventListener('click', deleteCurrentTaskList);
+
+  function renameTaksList() {
+    const changedTitle = getChangedTitle();
+    if (isTitleCorrect(changedTitle)) {
+      const oldTaskListTitle = document.querySelector('#task-list-title').innerText;
+      removeTaskListFromLocalStorage(oldTaskListTitle);
+      removeTaskListTitleFromLocalStorage(oldTaskListTitle);
+
+      document.querySelector('#task-list-title').innerText = changedTitle;
+      clearInput('#changed-title');
+      saveCurrentTaskListToLocalStorage();
+      saveNewTitleListToLocalStorage();
+      saveTaskList();
+      updateShowTaskListTitles();
+    } /* else {
+      console.log('tttt');
+     } */
+    closeMenuSettings();
+  }
+  document.querySelector('#bttn-change-title').addEventListener('click', renameTaksList);
 
   function loadTasksFromFile() {
     if (window.File && window.FileReader && window.FileList && window.Blob) {
@@ -233,15 +408,15 @@
 
       oFReader.onload = (oFREvent) => {
         const taskList = oFREvent.target.result;
-        const splitedTaskList = taskList.split(']');
-        splitedTaskList[0] += ']';
+        const splitedTaskList = taskList.split('[');
+        const taskListTitle = splitedTaskList[0].slice(1, -1);
+        const tasks = `[${splitedTaskList[1]}`;
 
         (async function setLocalSotrage() {
-          await localStorage.clear();
-          await localStorage.setItem('task-list', splitedTaskList[0]);
-          await localStorage.setItem('task-list-title', splitedTaskList[1]);
-          // location.reload()
-          await removeAllTasks();
+          await clearTaskList();
+          await localStorage.setItem('current-task-list', JSON.stringify(taskListTitle));
+          await localStorage.setItem(taskListTitle, tasks);
+          await saveNewTitleListToLocalStorage(taskListTitle);
           await taskListIsOpen();
         }());
       };
@@ -258,7 +433,7 @@
         }
         closeMenuSettings();
       };
-      document.querySelector('#upload-tasks').addEventListener('click', load);
+      document.querySelector('#upload-tasks-from-file').addEventListener('click', load);
     } else {
       document.querySelector('.error').innerText = 'Error: The browser doesn\'t support the FileReader Object!';
       document.querySelector('.error').classList.add('show');
@@ -271,21 +446,12 @@
 
   function saveTaskListToFile() {
     const a = document.createElement('a');
-    const blob = new Blob([localStorage.getItem('task-list'), localStorage.getItem('task-list-title')], { type: 'application/json' });
+    const blob = new Blob([localStorage.getItem('current-task-list'), localStorage.getItem(getTaskListTitle())], { type: 'application/json' });
     a.href = URL.createObjectURL(blob);
     a.download = 'task-list.json';
     a.click();
     closeMenuSettings();
   }
   document.querySelector('#save-tasks').addEventListener('click', saveTaskListToFile);
-
-  function resetAll() {
-    removeAllTasks();
-    addExampleTaskListTitle();
-    localStorage.clear();
-    taskListIsOpen();
-    closeMenuSettings();
-  }
-  document.querySelector('#reset-all').addEventListener('click', resetAll);
   // window.visualViewport.height
 }());

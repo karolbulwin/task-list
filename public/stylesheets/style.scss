@@ -26,29 +26,23 @@ h1 {
         width: 2.625em;
         height: 2.375em;
         background-color: transparentize($main, $amount: .95);
+        &:hover, &:focus {
+            background-color: transparentize($main, $amount: .65);
+        }
+    }
+    .navbar-collapse {
+        width: 11em;
+        @include boxshadow($blur: 0.5125em, $spread: 0.125em);
+        .navbar-nav .dropdown-menu {
+            text-align: center;
+            li.dropdown-item {
+                white-space: normal;
+                word-break: break-word;
+            }
+        }
     }
 }
 
-.navbar-collapse {
-    @include boxshadow($blur: 0.5125em, $spread: 0.125em);
-}
-
-.setting-box {
-    position: absolute;
-    top: .4em;
-    right: .4em;
-    button {
-        width: 2.625em;
-        height: 2.375em;
-        background-color: transparentize($main, $amount: .95);
-    }
-    ul {
-        text-align: center;
-    }
-    div.dropdown-menu{
-        padding: 0;
-    }
-}
 .error {
     position: absolute;
     display: none;
