@@ -50,22 +50,21 @@
       </button>
       <div class="collapse navbar-collapse bg-light" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item nav-link" id="change-title" data-toggle="modal" data-target="#change-task-list-title">
-            Change task list title</li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
               aria-haspopup="true" aria-expanded="false">
               Task lists
             </a>
             <ul class="dropdown-menu" aria-labelledby="task-lists">
-              <div></div>
+              <div class="dropdown-divider"></div>
             </ul>
           </li>
-          <li class="nav-item nav-link" id="remove-all">Remove all tasks</li>
-          <li class="nav-item nav-link text-success" id="remove-done">Remove done tasks</li>
           <li class="nav-item nav-link" data-toggle="modal" data-target="#uploadFile">Upload Task List from
             file</li>
           <li class="nav-item nav-link" id="save-tasks">Save Task List to file</li>
+          <div class="dropdown-divider"></div>
+          <li class="nav-item nav-link text-success" id="remove-done">Remove done tasks</li>
+          <li class="nav-item nav-link text-warning" id="remove-all">Remove all tasks</li>
           <div class="dropdown-divider"></div>
           <li class="nav-item nav-link text-danger" id="delete-task-list">Delete Task List</li>
         </ul>
@@ -140,7 +139,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <input type="file" class="form-control" name="new-title" id="files" aria-describedby="upload-tasks-from-file">
+          <input type="file" class="" name="new-title" id="files" aria-describedby="upload-tasks-from-file">
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
