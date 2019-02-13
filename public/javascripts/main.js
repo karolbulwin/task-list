@@ -236,9 +236,15 @@
     });
     const div = createHtmlElementToSeparateAddNewTaskList();
     const createTaskList = createHtmlElementForTaskListsTitles('Create new Task List');
+    const changeTitle = createHtmlElementForTaskListsTitles('Change task list title');
     createTaskList.setAttribute('data-toggle', 'modal');
     createTaskList.setAttribute('data-target', '#create-new-task-list');
+    changeTitle.setAttribute('id', 'change-title');
+    changeTitle.setAttribute('data-toggle', 'modal');
+    changeTitle.setAttribute('data-target', '#change-task-list-title');
+
     taskList.append(div);
+    taskList.append(changeTitle);
     taskList.append(createTaskList);
   }
   function updateShowTaskListTitles() {
@@ -337,7 +343,8 @@
   function changeCurrentTaskListTitle() {
     const taskListsTitles = document.querySelector('.dropdown-menu');
     taskListsTitles.addEventListener('click', (ev) => {
-      if (ev.target.tagName === 'LI' && ev.target.innerText !== 'Create new Task List') {
+      if (ev.target.tagName === 'LI' && ev.target.innerText !== 'Create new Task List'
+      && ev.target.innerText !== 'Change task list title') {
         switchBetweenTaskLists(ev.target.innerText);
       }
     }, false);
@@ -355,7 +362,7 @@
       initializeTaskList();
     }
   }
-  
+
   function removeTaskListTitleFromLocalStorage(taskTitle) {
     const taskListsTitles = getTaskListsTitles();
     const newTaskListsTitles = [];
@@ -402,14 +409,14 @@
 
       oFReader.onload = (oFREvent) => {
         const taskList = oFREvent.target.result;
-        const splitedTaskList = taskList.split(']');
-        splitedTaskList[0] += ']';
+        const splitedTaskList = taskList.split('[');
+        const taskListTitle = splitedTaskList[0].slice(1, -1);
+        const tasks = `[${splitedTaskList[1]}`;
 
         (async function setLocalSotrage() {
-          await localStorage.clear();
-          await localStorage.setItem('task-list', splitedTaskList[0]);
-          await localStorage.setItem('task-list-title', splitedTaskList[1]);
-          await removeAllTasks();
+          await clearTaskList();
+          await localStorage.setItem('current-task-list', JSON.stringify(taskListTitle));
+          await localStorage.setItem(taskListTitle, tasks);
           await taskListIsOpen();
         }());
       };
@@ -439,7 +446,7 @@
 
   function saveTaskListToFile() {
     const a = document.createElement('a');
-    const blob = new Blob([localStorage.getItem('task-list'), localStorage.getItem('task-list-title')], { type: 'application/json' });
+    const blob = new Blob([localStorage.getItem('current-task-list'), localStorage.getItem(getTaskListTitle())], { type: 'application/json' });
     a.href = URL.createObjectURL(blob);
     a.download = 'task-list.json';
     a.click();
