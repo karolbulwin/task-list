@@ -16,31 +16,21 @@ h1 {
   top: 0.4em;
   right: 0;
   z-index: 4; }
-  .navbar button:first {
+  .navbar button {
     width: 2.625em;
     height: 2.375em;
     background-color: rgba(0, 0, 0, 0.05); }
-  .navbar span#current-title {
-    padding: 0.4em;
-    width: 7em;
-    overflow: auto; }
-
-.navbar-collapse {
-  -webkit-box-shadow: 0em 0em 0.5125em 0.125em rgba(0, 0, 0, 0.3);
-  box-shadow: 0em 0em 0.5125em 0.125em rgba(0, 0, 0, 0.3); }
-
-.setting-box {
-  position: absolute;
-  top: .4em;
-  right: .4em; }
-  .setting-box button {
-    width: 2.625em;
-    height: 2.375em;
-    background-color: rgba(0, 0, 0, 0.05); }
-  .setting-box ul {
-    text-align: center; }
-  .setting-box div.dropdown-menu {
-    padding: 0; }
+    .navbar button:hover, .navbar button:focus {
+      background-color: rgba(0, 0, 0, 0.35); }
+  .navbar .navbar-collapse {
+    width: 11em;
+    -webkit-box-shadow: 0em 0em 0.5125em 0.125em rgba(0, 0, 0, 0.3);
+    box-shadow: 0em 0em 0.5125em 0.125em rgba(0, 0, 0, 0.3); }
+    .navbar .navbar-collapse .navbar-nav .dropdown-menu {
+      text-align: center; }
+      .navbar .navbar-collapse .navbar-nav .dropdown-menu li.dropdown-item {
+        white-space: normal;
+        word-break: break-word; }
 
 .error {
   position: absolute;
