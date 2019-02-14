@@ -401,7 +401,7 @@
   }
   document.querySelector('#bttn-change-title').addEventListener('click', renameTaksList);
 
-  function loadTasksFromFile() {
+  function loadTasksFromFile() { // do not work on android webview, safari on iOS
     if (window.File && window.FileReader && window.FileList && window.Blob) {
       const oFReader = new FileReader();
       const rFilter = 'application/json';
