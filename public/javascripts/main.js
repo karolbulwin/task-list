@@ -404,7 +404,7 @@
   function loadTasksFromFile() { // do not work on android webview, safari on iOS
     if (window.File && window.FileReader && window.FileList && window.Blob) {
       const oFReader = new FileReader();
-      const rFilter = 'application/json';
+      const rFilter = 'text/plain'; // 'application/json';
 
       oFReader.onload = (oFREvent) => {
         const taskList = oFREvent.target.result;
@@ -446,7 +446,7 @@
 
   function saveTaskListToFile() {
     const a = document.createElement('a');
-    const blob = new Blob([localStorage.getItem('current-task-list'), localStorage.getItem(getTaskListTitle())], { type: 'application/json' });
+    const blob = new Blob([localStorage.getItem('current-task-list'), localStorage.getItem(getTaskListTitle())], { type: 'text/plain' });
     a.href = URL.createObjectURL(blob);
     a.download = 'task-list.json';
     a.click();

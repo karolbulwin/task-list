@@ -1,4 +1,4 @@
-const CACHE_NAME = 'task-list-cache-v1.3';
+const CACHE_NAME = 'task-list-cache-v1.3.1';
 const urlsToCache = [
   '/',
   'tasks.html',
@@ -28,7 +28,7 @@ self.addEventListener('install', (event) => {
 });
 
 self.addEventListener('activate', (event) => {
-  const cacheWhitelist = ['task-list-cache-v1.3'];
+  const cacheWhitelist = ['task-list-cache-v1.3.1'];
 
   event.waitUntil(
     caches.keys().then(cacheNames => Promise.all(
