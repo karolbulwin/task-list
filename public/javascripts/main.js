@@ -215,7 +215,7 @@
       if (noRepeatedTaskListTitle(title) === true) {
         isCorrect = true;
       } else {
-        showError('There is a list with such a title');
+        showError('There is a task list with such a title');
       }
     }
     return isCorrect;
@@ -418,13 +418,32 @@
         const taskListTitle = splitedTaskList[0].slice(1, -1);
         const tasks = `[${splitedTaskList[1]}`;
 
-        (async function setLocalSotrage() {
-          await clearTaskList();
-          await localStorage.setItem('current-task-list', JSON.stringify(taskListTitle));
-          await localStorage.setItem(taskListTitle, tasks);
-          await saveNewTitleListToLocalStorage(taskListTitle);
-          await taskListIsOpen();
-        }());
+        if (taskListTitle !== '') {
+          if (noRepeatedTaskListTitle(taskListTitle) === true) {
+            (async function setLocalSotrage() {
+              await clearTaskList();
+              await localStorage.setItem('current-task-list', JSON.stringify(taskListTitle));
+              await localStorage.setItem(taskListTitle, tasks);
+              await saveNewTitleListToLocalStorage(taskListTitle);
+              await taskListIsOpen();
+            }());
+          } else {
+            $('#overwrite-task-list').modal('show');
+            $('#task-list-to-overwrite').text(taskListTitle);
+            document.querySelector('#overwrite-task-list-bttn').addEventListener('click', () => {
+              showError(`${taskListTitle} was overwritten!`);
+              (async function removeOldAndAddNewTaskListToLocalSotrage() {
+                await clearTaskList();
+                await removeTaskListFromLocalStorage(taskListTitle);
+                await removeTaskListTitleFromLocalStorage(taskListTitle);
+                await localStorage.setItem('current-task-list', JSON.stringify(taskListTitle));
+                await localStorage.setItem(taskListTitle, tasks);
+                await saveNewTitleListToLocalStorage(taskListTitle);
+                await taskListIsOpen();
+              }());
+            });
+          }
+        }
       };
       const load = function loadTaskListFromFile() {
         const oFile = document.getElementById('files').files[0];
