@@ -63,13 +63,11 @@
   function noRepeatedTaskListTitle(taskListTitle) {
     const taskListsTitles = getTaskListsTitles();
     let noOnTheList = true;
-    if (taskListsTitles.length > 2) {
-      taskListsTitles.forEach((title) => {
-        if (taskListTitle === title) {
-          noOnTheList = false;
-        }
-      });
-    }
+    taskListsTitles.forEach((title) => {
+      if (taskListTitle === title) {
+        noOnTheList = false;
+      }
+    });
     return noOnTheList;
   }
   function getTaskListTitle() {
@@ -353,7 +351,7 @@
     const taskListsTitles = document.querySelector('.dropdown-menu');
     taskListsTitles.addEventListener('click', (ev) => {
       if (ev.target.tagName === 'LI' && ev.target.innerText !== 'Create new Task List'
-      && ev.target.innerText !== 'Change task list title') {
+        && ev.target.innerText !== 'Change task list title') {
         switchBetweenTaskLists(ev.target.innerText);
       }
     }, false);
