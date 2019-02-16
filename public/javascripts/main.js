@@ -247,9 +247,11 @@
     const changeTitle = createHtmlElementForTaskListsTitles('Change task list title');
     createTaskList.setAttribute('data-toggle', 'modal');
     createTaskList.setAttribute('data-target', '#create-new-task-list');
+    createTaskList.classList.add('py-2');
     changeTitle.setAttribute('id', 'change-title');
     changeTitle.setAttribute('data-toggle', 'modal');
     changeTitle.setAttribute('data-target', '#change-task-list-title');
+    changeTitle.classList.add('py-2');
 
     taskList.append(div);
     taskList.append(changeTitle);
