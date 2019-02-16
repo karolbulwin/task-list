@@ -202,11 +202,22 @@
     newTitle = newTitle.trim();
     return newTitle;
   }
+
+  function showError(err) {
+    document.querySelector('.error').innerText = err;
+    document.querySelector('.error').classList.add('show');
+    setTimeout(() => {
+      document.querySelector('.error').classList.remove('show');
+    }, 3000);
+  }
+
   function isTitleCorrect(title) {
     let isCorrect = false;
     if (title !== '') {
       if (noRepeatedTaskListTitle(title) === true) {
         isCorrect = true;
+      } else {
+        showError('There is a list with such a title');
       }
     }
     return isCorrect;
@@ -326,7 +337,6 @@
     if (localStorage['current-task-list']) {
       setTitleFromLocalStorage();
       updateTasksFromLocalStorage();
-      // setProgress();// for empty tasks list
     } else {
       initializeTaskList();
     }
@@ -394,17 +404,15 @@
       saveNewTitleListToLocalStorage();
       saveTaskList();
       updateShowTaskListTitles();
-    } /* else {
-      console.log('tttt');
-     } */
+    }
     closeMenuSettings();
   }
   document.querySelector('#bttn-change-title').addEventListener('click', renameTaksList);
 
-  function loadTasksFromFile() { // do not work on android webview, safari on iOS
+  function loadTasksFromFile() {
     if (window.File && window.FileReader && window.FileList && window.Blob) {
       const oFReader = new FileReader();
-      const rFilter = 'text/plain'; // 'application/json';
+      const rFilter = 'text/plain'; // with 'application/json' do not work on android webview, samsung internet, safari on iOS
 
       oFReader.onload = (oFREvent) => {
         const taskList = oFREvent.target.result;
@@ -425,21 +433,13 @@
         if (oFile.type === rFilter) {
           oFReader.readAsText(oFile);
         } else {
-          document.querySelector('.error').innerText = 'Error: Incorrect file!';
-          document.querySelector('.error').classList.add('show');
-          setTimeout(() => {
-            document.querySelector('.error').classList.remove('show');
-          }, 3000);
+          showError('Error: Incorrect file!');
         }
         closeMenuSettings();
       };
       document.querySelector('#upload-tasks-from-file').addEventListener('click', load);
     } else {
-      document.querySelector('.error').innerText = 'Error: The browser doesn\'t support the FileReader Object!';
-      document.querySelector('.error').classList.add('show');
-      setTimeout(() => {
-        document.querySelector('.error').classList.remove('show');
-      }, 3000);
+      showError('Error: The browser doesn\'t support the FileReader Object!');
     }
   }
   loadTasksFromFile();
@@ -453,5 +453,4 @@
     closeMenuSettings();
   }
   document.querySelector('#save-tasks').addEventListener('click', saveTaskListToFile);
-  // window.visualViewport.height
 }());
