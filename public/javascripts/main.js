@@ -448,7 +448,7 @@
     const a = document.createElement('a');
     const blob = new Blob([localStorage.getItem('current-task-list'), localStorage.getItem(getTaskListTitle())], { type: 'text/plain' });
     a.href = URL.createObjectURL(blob);
-    a.download = 'task-list.json';
+    a.download = 'task-list.txt';
     a.click();
     closeMenuSettings();
   }
