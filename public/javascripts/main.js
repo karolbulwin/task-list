@@ -159,6 +159,7 @@
     }, false);
   }
   addEventListenerForTasks();
+
   class ClicksCounter {
     constructor() {
       this.counter = 0;
@@ -207,7 +208,6 @@
   function removeAllTasks() {
     cCForRemoveAll.increaseTheCounter();
     cCForRemoveAll.autoResetCounter();
-    console.log(cCForRemoveAll.clicks);
     if (cCForRemoveAll.clicks === 2) {
       document.querySelectorAll('#tasks-list li').forEach((li) => {
         removeTaskFromList(li);
@@ -221,7 +221,6 @@
   function removeDoneTasks() {
     cCForRemoveDone.increaseTheCounter();
     cCForRemoveDone.autoResetCounter();
-    console.log(cCForRemoveDone.clicks);
     if (cCForRemoveDone.clicks === 2) {
       document.querySelectorAll('#tasks-list li').forEach((li) => {
         if (li.firstElementChild.classList.value === 'checked') {
@@ -437,7 +436,6 @@
   function deleteCurrentTaskList() {
     cCForDelete.increaseTheCounter();
     cCForDelete.autoResetCounter();
-    console.log(cCForDelete.clicks);
     if (cCForDelete.clicks === 2) {
       cCForDelete.resetCounter();
       const currentTaskList = getTaskListTitle();
