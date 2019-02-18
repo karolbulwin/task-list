@@ -253,11 +253,11 @@
   }
 
   function showError(err) {
-    document.querySelector('.error').innerText = err;
-    document.querySelector('.error').classList.add('show');
+    document.querySelector('#info-for-user').innerText = err;
+    $('#info-bar').modal('show');
     setTimeout(() => {
-      document.querySelector('.error').classList.remove('show');
-    }, 3000);
+      $('#info-bar').modal('hide');
+    }, 3500);
   }
 
   function isTitleCorrect(title) {
