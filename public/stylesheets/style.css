@@ -31,7 +31,9 @@ h1 {
     -webkit-box-shadow: 0em 0em 0.5125em 0.125em rgba(0, 0, 0, 0.3);
     box-shadow: 0em 0em 0.5125em 0.125em rgba(0, 0, 0, 0.3); }
     .navbar .navbar-collapse .navbar-nav .dropdown-menu {
-      text-align: center; }
+      text-align: center;
+      -webkit-box-shadow: inset 0.0175em 0.0125em 0.2125em -0.045em rgba(0, 0, 0, 0.3);
+      box-shadow: inset 0.0175em 0.0125em 0.2125em -0.045em rgba(0, 0, 0, 0.3); }
       .navbar .navbar-collapse .navbar-nav .dropdown-menu li.dropdown-item {
         white-space: normal;
         word-break: break-word; }

@@ -36,6 +36,7 @@ h1 {
         @include boxshadow($blur: 0.5125em, $spread: 0.125em);
         .navbar-nav .dropdown-menu {
             text-align: center;
+            @include boxshadowInset($horizontal: 0.0175em, $vertical: 0.0125em, $blur: 0.2125em);
             li.dropdown-item {
                 white-space: normal;
                 word-break: break-word;
