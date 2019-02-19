@@ -528,7 +528,9 @@
     const blob = new Blob([localStorage.getItem('current-task-list'), localStorage.getItem(getTaskListTitle())], { type: 'text/plain' });
     a.href = URL.createObjectURL(blob);
     a.download = `${getTaskListTitle()}.txt`;
+    document.body.appendChild(a);
     a.click();
+    document.body.removeChild(a);
     closeMenuSettings();
   }
   document.querySelector('#save-tasks').addEventListener('click', saveTaskListToFile);
