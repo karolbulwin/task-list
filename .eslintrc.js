@@ -6,6 +6,6 @@ module.exports = {
     },
     "rules": {
         "comma-dangle": ["error", "never"],
-        'no-console': 'off',
+        "no-console": "off",
     }
 };
