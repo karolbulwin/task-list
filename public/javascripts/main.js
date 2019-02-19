@@ -7,6 +7,7 @@
 
     li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center', 'new-task');
     p.innerText = task;
+    li.setAttribute('tabindex', '0');
     bttn.type = 'button';
     bttn.classList.add('close');
     bttn.setAttribute('aria-label', 'Close');
@@ -124,7 +125,7 @@
       addTask();
     }
   }
-  document.addEventListener('keydown', checkTheKey);
+  document.querySelector('#task').addEventListener('keydown', checkTheKey);
 
   function removeTaskFromList(task) {
     const li = task;
@@ -205,10 +206,10 @@
     document.querySelector('button').click();
   }
 
-  function removeAllTasks() {
+  function removeAllTasks(clicks = 0) {
     cCForRemoveAll.increaseTheCounter();
     cCForRemoveAll.autoResetCounter();
-    if (cCForRemoveAll.clicks === 2) {
+    if (cCForRemoveAll.clicks === 2 || clicks === 2) {
       document.querySelectorAll('#tasks-list li').forEach((li) => {
         removeTaskFromList(li);
       });
@@ -282,6 +283,7 @@
   function createHtmlElementForTaskListsTitles(task) {
     const li = document.createElement('li');
     li.innerText = task;
+    li.setAttribute('tabindex', '0');
     li.classList.add('dropdown-item', 'task-list-title'); //
     return li;
   }
@@ -320,7 +322,7 @@
       clearInput('#new-title');
       saveCurrentTaskListToLocalStorage();
       saveNewTitleListToLocalStorage();
-      removeAllTasks();
+      removeAllTasks(2);
       saveTaskList();
       updateShowTaskListTitles();
     }
@@ -530,4 +532,92 @@
     closeMenuSettings();
   }
   document.querySelector('#save-tasks').addEventListener('click', saveTaskListToFile);
+
+  function keyboardNavTaskList(e) {
+    switch (e.keyCode) {
+      case 13:
+        e.target.click();
+        break;
+      case 32:
+        e.target.click();
+        break;
+      case 37:
+        if (e.target.parentElement.tagName === 'LI') {
+          e.target.parentElement.focus();
+        }
+        break;
+      case 38:
+        if (e.target.previousElementSibling !== null) {
+          e.target.previousElementSibling.focus();
+        }
+        if (e.target.parentElement.previousElementSibling !== null
+          && e.target.parentElement.previousElementSibling.tagName === 'LI') {
+          e.target.parentElement.previousElementSibling.lastChild.focus();
+        }
+        break;
+      case 39:
+        if (e.target.lastChild.tagName === 'BUTTON') {
+          e.target.lastChild.focus();
+        }
+        break;
+      case 40:
+        if (e.target.nextElementSibling !== null) {
+          e.target.nextElementSibling.focus();
+        }
+        if (e.target.parentElement.nextElementSibling !== null
+          && e.target.parentElement.nextElementSibling.tagName === 'LI') {
+          e.target.parentElement.nextElementSibling.lastChild.focus();
+        }
+        break;
+
+      default:
+    }
+  }
+  document.querySelector('#tasks-list').addEventListener('keydown', keyboardNavTaskList);
+
+  function keyboardNavMenu(e) {
+    switch (e.keyCode) {
+      case 13:
+        e.target.click();
+        break;
+      case 32:
+        e.target.click();
+        break;
+      case 38:
+        if (e.target.previousElementSibling !== null) {
+          e.target.previousElementSibling.focus();
+        }
+        if (e.target.previousElementSibling !== null
+          && e.target.previousElementSibling.tagName === 'DIV') {
+          e.target.previousElementSibling.previousElementSibling.focus();
+        }
+        break;
+      case 40:
+        if (e.target.nextElementSibling !== null) {
+          e.target.nextElementSibling.focus();
+        }
+        if (e.target.nextElementSibling !== null
+          && e.target.nextElementSibling.tagName === 'DIV') {
+          e.target.nextElementSibling.nextElementSibling.focus();
+        }
+        break;
+
+      default:
+    }
+  }
+  document.querySelector('nav ul').addEventListener('keydown', keyboardNavMenu);
+
+  function keyboardSupportForRenameTaskList(e) {
+    if (e.keyCode === 13) {
+      document.querySelector('#bttn-change-title').click();
+    }
+  }
+  document.querySelector('#changed-title').addEventListener('keydown', keyboardSupportForRenameTaskList);
+
+  function keyboardSupportForCreateNewTaskList(e) {
+    if (e.keyCode === 13) {
+      document.querySelector('#create-new-task-list-bttn').click();
+    }
+  }
+  document.querySelector('#new-title').addEventListener('keydown', keyboardSupportForCreateNewTaskList);
 }());

@@ -6,6 +6,11 @@ body {
     background-color: $theme;
     @include user-select;
 }
+ 
+:focus:not(:disabled):not(.disabled) {
+    @include boxshadowFocus;
+    outline: none;
+}
 
 header {
     position: relative;
@@ -27,8 +32,11 @@ h1 {
         width: 2.625em;
         height: 2.375em;
         background-color: transparentize($main, $amount: .95);
-        &:hover, &:focus {
-            background-color: transparentize($main, $amount: .65);
+        &:hover {
+            background-color: transparentize($main, $amount: .85);
+        }
+        &:active {
+            background-color: transparentize($main, $amount: .80);
         }
     }
     .navbar-collapse {
@@ -57,13 +65,23 @@ input[type=text] {
     @include boxshadowInset;
 }
 
+.form-control:focus {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    border-color: rgb(206, 212, 218);
+}
+
 .progress {
     height: 0.5em;
     @include boxshadowInset;
 
 }
+
 .btn:not(:disabled):not(.disabled) {
     @include boxshadow;
+    &:focus {
+        @include boxshadowFocus;
+    }
 }
 
 ul > li {

@@ -63,145 +63,151 @@
               <div class="dropdown-divider"></div>
             </ul>
           </li>
-          <li class="nav-item nav-link" data-toggle="modal" data-target="#uploadFile">Upload Task List from
+          <li class="nav-item nav-link" data-toggle="modal" data-target="#uploadFile" tabindex="0">Upload Task List from
             file</li>
-          <li class="nav-item nav-link" id="save-tasks">Save Task List to file</li>
+          <li class="nav-item nav-link" id="save-tasks" tabindex="0">Save Task List to file</li>
           <div class="dropdown-divider"></div>
-          <li class="nav-item nav-link text-success" id="remove-done" data-toggle="popover" data-placement="bottom" data-content="Double click to confirm!">Remove done tasks</li>
-          <li class="nav-item nav-link text-warning" id="remove-all" data-toggle="popover" data-placement="bottom" data-content="Double click to confirm!">Remove all tasks</li>
+          <li class="nav-item nav-link text-success" id="remove-done" data-toggle="popover" data-placement="bottom"
+            data-content="Double click to confirm!" tabindex="0">Remove done tasks</li>
+          <li class="nav-item nav-link text-warning" id="remove-all" data-toggle="popover" data-placement="bottom"
+            data-content="Double click to confirm!" tabindex="0">Remove all tasks</li>
           <div class="dropdown-divider"></div>
-          <li class="nav-item nav-link text-danger pb-3" id="delete-task-list" data-toggle="popover" data-placement="bottom" data-content="Double click to confirm!">Delete Task List</li>
+          <li class="nav-item nav-link text-danger pb-3" id="delete-task-list" data-toggle="popover"
+            data-placement="bottom" data-content="Double click to confirm!" tabindex="0">Delete Task List</li>
         </ul>
       </div>
     </nav>
   </header>
+  
+  <main>
+    <h1 class="text-center py-4 px-2" id="task-list-title"></h1>
 
-  <h1 class="text-center py-4 px-2" id="task-list-title"></h1>
-
-  <div class="modal fade" id="info-bar" tabindex="-1" role="alert" aria-labelledby="info-for-user"
-  aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header alert-secondary">
-          <h5 class="modal-title" id="info-for-user"></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="modal fade" id="change-task-list-title" tabindex="-1" role="dialog" aria-labelledby="changing-title"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="changing-title">Type new title for Your task list</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="cheanged-title"></label>
-            <input type="text" class="form-control" name="changed-title" id="changed-title"
-              aria-describedby="bttn-change-title" placeholder="Type new title here...">
+    <div class="modal fade" id="info-bar" tabindex="-1" role="alert" aria-labelledby="info-for-user" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header alert-secondary">
+            <h5 class="modal-title" id="info-for-user"></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success" id="bttn-change-title" data-dismiss="modal">Change
-            title</button>
-        </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal fade" id="create-new-task-list" tabindex="-1" role="dialog" aria-labelledby="creating-task-list"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="creating-task-list">Type new title for Your task list</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="form-group">
-            <label for="new-title"></label>
-            <input type="text" class="form-control" name="new-title" id="new-title"
-              aria-describedby="create-new-task-list-bttn" placeholder="Type new title here...">
+    <div class="modal fade" id="change-task-list-title" tabindex="-1" role="dialog" aria-labelledby="changing-title"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="changing-title">Type new title for Your task list</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="cheanged-title"></label>
+              <input type="text" class="form-control" name="changed-title" id="changed-title"
+                aria-describedby="bttn-change-title" placeholder="Type new title here...">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" id="bttn-change-title" data-dismiss="modal">Change
+              title</button>
           </div>
         </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success" id="create-new-task-list-bttn" data-dismiss="modal">Create new
-            Task List</button>
-        </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal fade" id="overwrite-task-list" tabindex="-1" role="dialog" aria-labelledby="overwriting-task-list"
-  aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="overwriting-task-list">There is a task list called <span id='task-list-to-overwrite'></span></h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <p>Do you want to overwrite it?</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success" id="overwrite-task-list-bttn" data-dismiss="modal">Overwrite</button>
+    <div class="modal fade" id="create-new-task-list" tabindex="-1" role="dialog" aria-labelledby="creating-task-list"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="creating-task-list">Type new title for Your task list</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="new-title"></label>
+              <input type="text" class="form-control" name="new-title" id="new-title"
+                aria-describedby="create-new-task-list-bttn" placeholder="Type new title here...">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" id="create-new-task-list-bttn" data-dismiss="modal">Create new
+              Task List</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="upload-task-list-file"
-    aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="upload-task-list-file">Upload task list file</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <input type="file" class="" name="new-title" id="files" aria-describedby="upload-tasks-from-file">
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-success" id="upload-tasks-from-file" data-dismiss="modal">Save
-            changes</button>
+    <div class="modal fade" id="overwrite-task-list" tabindex="-1" role="dialog" aria-labelledby="overwriting-task-list"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="overwriting-task-list">There is a task list called <span
+                id='task-list-to-overwrite'></span></h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Do you want to overwrite it?</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" id="overwrite-task-list-bttn"
+              data-dismiss="modal">Overwrite</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="container">
-    <div class="input-group mb-3">
-      <input type="text" class="form-control" name="task" id="task" placeholder="Type Your task here..."
-        aria-label="Type your task here" aria-describedby="button-add-task">
-      <div class="input-group-append">
-        <button class="btn btn-secondary" type="button" id="button-add-task">Add</button>
+    <div class="modal fade" id="uploadFile" tabindex="-1" role="dialog" aria-labelledby="upload-task-list-file"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="upload-task-list-file">Upload task list file</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <input type="file" class="" name="new-title" id="files" aria-describedby="upload-tasks-from-file">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" id="upload-tasks-from-file" data-dismiss="modal">Save
+              changes</button>
+          </div>
+        </div>
       </div>
     </div>
-    <div class="progress mb-1">
-      <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
-        aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+
+    <div class="container">
+      <div class="input-group mb-3">
+        <input type="text" class="form-control" name="task" id="task" placeholder="Type Your task here..."
+          aria-label="Type your task here" aria-describedby="button-add-task">
+        <div class="input-group-append">
+          <button class="btn btn-secondary" type="button" id="button-add-task">Add</button>
+        </div>
+      </div>
+      <div class="progress mb-1">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar"
+          aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%"></div>
+      </div>
+      <ul class="list-group mb-2 rounded" id="tasks-list">
+      </ul>
     </div>
-    <ul class="list-group mb-2 rounded" id="tasks-list">
-    </ul>
-  </div>
+  </main>
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

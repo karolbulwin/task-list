@@ -14,3 +14,8 @@
     -webkit-box-shadow: inset $horizontal $vertical $blur $spread $color;
     box-shadow: inset $horizontal $vertical $blur $spread $color;
 }
+
+@mixin boxshadowFocus($horizontal: 0em, $vertical: 0em, $blur: 0em, $spread1: 0.0625em, $color1: $focus1, $spread2: 0.1875em, $color2: $focus2) {
+    -webkit-box-shadow: $horizontal $vertical $blur $spread1 $color1, $horizontal $vertical $blur $spread2 $color2;
+            box-shadow: $horizontal $vertical $blur $spread1 $color1, $horizontal $vertical $blur $spread2 $color2;
+}
