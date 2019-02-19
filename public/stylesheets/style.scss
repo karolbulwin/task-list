@@ -6,7 +6,12 @@ body {
     background-color: $theme;
     @include user-select;
 }
- 
+
+body.using-mouse :focus:not(:disabled):not(.disabled) {
+    -webkit-box-shadow: none;
+            box-shadow: none;
+  }
+
 :focus:not(:disabled):not(.disabled) {
     @include boxshadowFocus;
     outline: none;
