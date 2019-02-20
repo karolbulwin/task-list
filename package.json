@@ -6,15 +6,14 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "DEBUG=app,app* nodemon app.js",
-    "lint": "eslint app.js",
-    "scss": "sass --watch scss:public/css"
-  },
+    "lint": "eslint app.js"
+    },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/karolbulwin/task-list.git"
   },
   "author": "",
-  "license": "",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/karolbulwin/task-list/issues"
   },
