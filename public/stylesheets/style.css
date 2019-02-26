@@ -75,8 +75,7 @@ input[type=text] {
 
 ul > li {
   -webkit-transition-duration: 600ms;
-  transition-duration: 600ms;
-  text-align: center; }
+  transition-duration: 600ms; }
   ul > li p {
     margin: 0;
     word-break: break-word; }
