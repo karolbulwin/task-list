@@ -95,6 +95,11 @@
     const taskListTitle = getTaskListTitle();
     localStorage.setItem(taskListTitle, JSON.stringify(tasksToSave));
   }
+  function sortIsOn() {
+    const sortStatus = document.querySelector('#sortAlphabetically').checked;
+    return sortStatus;
+  }
+
   function addTaskToList(task) {
     const taskList = document.querySelector('#tasks-list');
     const li = createHtmlElement(task);
