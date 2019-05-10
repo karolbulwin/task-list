@@ -443,6 +443,7 @@
     addExampleTaskListTitle();
     saveCurrentTaskListToLocalStorage();
     saveNewTitleListToLocalStorage();
+    setSortOption();
   }
   function clearTaskList() {
     document.querySelectorAll('#tasks-list li').forEach((li) => {
