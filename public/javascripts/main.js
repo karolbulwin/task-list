@@ -618,7 +618,12 @@
   function saveTaskListToFile() {
     const a = document.createElement('a');
     const blob = new Blob(
-      [localStorage.getItem('current-task-list'), localStorage.getItem(getTaskListTitle())],
+      [
+        localStorage.getItem('current-task-list'),
+        localStorage.getItem(taskListTitle),
+        '[',
+        localStorage.getItem(`${taskListTitle}-sorted`)
+      ],
       { type: 'text/plain' }
     );
     a.href = URL.createObjectURL(blob);
