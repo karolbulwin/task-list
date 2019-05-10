@@ -419,21 +419,7 @@
       }, 50);
     });
   }
-  function sortAlphabetically(taksList) {
-    const tasks = taksList;
-    tasks.sort((a, b) => {
-      const x = a.task.toLowerCase();
-      const y = b.task.toLowerCase();
-      if (x < y) {
-        return -1;
-      }
-      if (x > y) {
-        return 1;
-      }
-      return 0;
-    });
-    return tasks;
-  }
+
   document.querySelector('#sortAlphabetically').addEventListener('change', () => {
     if (sortIsOn) {
       clearTaskList();
