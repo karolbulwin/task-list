@@ -359,31 +359,7 @@
     const task = tasks[tasks.length - 1];
     return task;
   }
-  function retrieveTasksFromLocalStorage() {
-    const curretTaskListTitle = JSON.parse(localStorage.getItem('current-task-list'));
-    const savedTasks = JSON.parse(localStorage.getItem(curretTaskListTitle));
-    return savedTasks;
-  }
-  function retrieveSortOptionFromLocalStorage() {
-    const curretTaskListTitle = JSON.parse(localStorage.getItem('current-task-list'));
-    const sortStatus = JSON.parse(localStorage.getItem(`${curretTaskListTitle}-sorted`));
-    return sortStatus;
-  }
-  function sortAlphabetically(taksList) {
-    const tasks = taksList;
-    tasks.sort((a, b) => {
-      const x = a.task.toLowerCase();
-      const y = b.task.toLowerCase();
-      if (x < y) {
-        return -1;
-      }
-      if (x > y) {
-        return 1;
-      }
-      return 0;
-    });
-    return tasks;
-  }
+
   async function updateTasksFromLocalStorage() {
     let savedTasks = await retrieveTasksFromLocalStorage();
     if (retrieveSortOptionFromLocalStorage()) {
