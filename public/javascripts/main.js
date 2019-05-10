@@ -571,7 +571,7 @@
         const sorted = splitedTaskList[2];
 
         if (taskListTitle !== '') {
-          if (noRepeatedTaskListTitle(taskListTitle) === true) {
+          if (noRepeatedTaskListTitle(taskListTitle)) {
             (async function setLocalSotrage() {
               await clearTaskList();
               await localStorage.setItem('current-task-list', JSON.stringify(taskListTitle));
