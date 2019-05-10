@@ -167,6 +167,18 @@
     }
     return { isTask, task };
   }
+
+  function delayAddingNewTask() {
+    const taksInput = document.querySelector('#task');
+    taksInput.setAttribute('disabled', true);
+    taksInput.placeholder = 'Adding...';
+    setTimeout(() => {
+      taksInput.removeAttribute('disabled');
+      taksInput.placeholder = 'Type Your task here...';
+      taksInput.focus();
+    }, 600);
+  }
+
   function addTask() {
     const { isTask, task } = checkTask();
     if (isTask === true) {
