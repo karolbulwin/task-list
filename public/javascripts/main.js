@@ -5,7 +5,13 @@
     const bttn = document.createElement('button');
     const span = document.createElement('span');
 
-    li.classList.add('list-group-item', 'd-flex', 'justify-content-between', 'align-items-center', 'new-task');
+    li.classList.add(
+      'list-group-item',
+      'd-flex',
+      'justify-content-between',
+      'align-items-center',
+      'new-task'
+    );
     p.innerText = task;
     li.setAttribute('tabindex', '0');
     bttn.type = 'button';
@@ -26,7 +32,7 @@
     const progressMax = 100;
     let progressNow = 0;
     if (tasksDone !== null) {
-      progressNow = tasksDone.length * progressMax / tasks;
+      progressNow = (tasksDone.length * progressMax) / tasks;
       if (Number.isNaN(progressNow) === true) {
         progressNow = 0;
       }
@@ -138,26 +144,30 @@
   }
   function addEventListenerForTasks() {
     const taskList = document.querySelector('#tasks-list');
-    taskList.addEventListener('click', (ev) => {
-      if (ev.target.tagName === 'LI') {
-        ev.target.classList.toggle('checked-bg');
-        ev.target.firstElementChild.classList.toggle('checked');
-      }
-      if (ev.target.tagName === 'P') {
-        ev.target.classList.toggle('checked');
-        ev.target.parentElement.classList.toggle('checked-bg');
-      }
-      if (ev.target.tagName === 'SPAN') {
-        const task = ev.target.parentElement.parentElement;
-        removeTaskFromList(task);
-      }
-      if (ev.target.tagName === 'BUTTON') {
-        const task = ev.target.parentElement;
-        removeTaskFromList(task);
-      }
-      setProgress();
-      saveTaskList();
-    }, false);
+    taskList.addEventListener(
+      'click',
+      (ev) => {
+        if (ev.target.tagName === 'LI') {
+          ev.target.classList.toggle('checked-bg');
+          ev.target.firstElementChild.classList.toggle('checked');
+        }
+        if (ev.target.tagName === 'P') {
+          ev.target.classList.toggle('checked');
+          ev.target.parentElement.classList.toggle('checked-bg');
+        }
+        if (ev.target.tagName === 'SPAN') {
+          const task = ev.target.parentElement.parentElement;
+          removeTaskFromList(task);
+        }
+        if (ev.target.tagName === 'BUTTON') {
+          const task = ev.target.parentElement;
+          removeTaskFromList(task);
+        }
+        setProgress();
+        saveTaskList();
+      },
+      false
+    );
   }
   addEventListenerForTasks();
 
@@ -311,7 +321,9 @@
     taskList.append(createTaskList);
   }
   function updateShowTaskListTitles() {
-    document.querySelectorAll('.dropdown-menu li').forEach((li) => { li.remove(); });
+    document.querySelectorAll('.dropdown-menu li').forEach((li) => {
+      li.remove();
+    });
     document.querySelector('.dropdown-menu div').remove();
     showTaskListsTitles();
   }
@@ -333,7 +345,6 @@
     localStorage.removeItem(taskListTitle);
   }
 
-
   function getLastAddedTask() {
     const tasks = document.querySelectorAll('li');
     const task = tasks[tasks.length - 1];
@@ -353,15 +364,11 @@
       }
     }
     setTimeout(() => {
-      setProgress();// for empty tasks list
+      setProgress(); // for empty tasks list
     }, 100);
   }
   function addExampleTasks() {
-    const exampleTasks = [
-      'task 1',
-      'task 2',
-      'task 3'
-    ];
+    const exampleTasks = ['task 1', 'task 2', 'task 3'];
     exampleTasks.forEach((task) => {
       addTaskToList(task);
     });
@@ -404,12 +411,19 @@
   }
   function changeCurrentTaskListTitle() {
     const taskListsTitles = document.querySelector('.dropdown-menu');
-    taskListsTitles.addEventListener('click', (ev) => {
-      if (ev.target.tagName === 'LI' && ev.target.innerText !== 'Create new Task List'
-        && ev.target.innerText !== 'Change task list title') {
-        switchBetweenTaskLists(ev.target.innerText);
-      }
-    }, false);
+    taskListsTitles.addEventListener(
+      'click',
+      (ev) => {
+        if (
+          ev.target.tagName === 'LI'
+          && ev.target.innerText !== 'Create new Task List'
+          && ev.target.innerText !== 'Change task list title'
+        ) {
+          switchBetweenTaskLists(ev.target.innerText);
+        }
+      },
+      false
+    );
   }
   changeCurrentTaskListTitle();
   function changeCurrentTaskList() {
@@ -518,14 +532,17 @@
       };
       document.querySelector('#upload-tasks-from-file').addEventListener('click', load);
     } else {
-      showError('Error: The browser doesn\'t support the FileReader Object!');
+      showError("Error: The browser doesn't support the FileReader Object!");
     }
   }
   loadTasksFromFile();
 
   function saveTaskListToFile() {
     const a = document.createElement('a');
-    const blob = new Blob([localStorage.getItem('current-task-list'), localStorage.getItem(getTaskListTitle())], { type: 'text/plain' });
+    const blob = new Blob(
+      [localStorage.getItem('current-task-list'), localStorage.getItem(getTaskListTitle())],
+      { type: 'text/plain' }
+    );
     a.href = URL.createObjectURL(blob);
     a.download = `${getTaskListTitle()}.txt`;
     document.body.appendChild(a);
@@ -552,8 +569,10 @@
         if (e.target.previousElementSibling !== null) {
           e.target.previousElementSibling.focus();
         }
-        if (e.target.parentElement.previousElementSibling !== null
-          && e.target.parentElement.previousElementSibling.tagName === 'LI') {
+        if (
+          e.target.parentElement.previousElementSibling !== null
+          && e.target.parentElement.previousElementSibling.tagName === 'LI'
+        ) {
           e.target.parentElement.previousElementSibling.lastChild.focus();
         }
         break;
@@ -566,8 +585,10 @@
         if (e.target.nextElementSibling !== null) {
           e.target.nextElementSibling.focus();
         }
-        if (e.target.parentElement.nextElementSibling !== null
-          && e.target.parentElement.nextElementSibling.tagName === 'LI') {
+        if (
+          e.target.parentElement.nextElementSibling !== null
+          && e.target.parentElement.nextElementSibling.tagName === 'LI'
+        ) {
           e.target.parentElement.nextElementSibling.lastChild.focus();
         }
         break;
@@ -589,8 +610,10 @@
         if (e.target.previousElementSibling !== null) {
           e.target.previousElementSibling.focus();
         }
-        if (e.target.previousElementSibling !== null
-          && e.target.previousElementSibling.tagName === 'DIV') {
+        if (
+          e.target.previousElementSibling !== null
+          && e.target.previousElementSibling.tagName === 'DIV'
+        ) {
           e.target.previousElementSibling.previousElementSibling.focus();
         }
         break;
@@ -598,8 +621,7 @@
         if (e.target.nextElementSibling !== null) {
           e.target.nextElementSibling.focus();
         }
-        if (e.target.nextElementSibling !== null
-          && e.target.nextElementSibling.tagName === 'DIV') {
+        if (e.target.nextElementSibling !== null && e.target.nextElementSibling.tagName === 'DIV') {
           e.target.nextElementSibling.nextElementSibling.focus();
         }
         break;
@@ -614,14 +636,18 @@
       document.querySelector('#bttn-change-title').click();
     }
   }
-  document.querySelector('#changed-title').addEventListener('keydown', keyboardSupportForRenameTaskList);
+  document
+    .querySelector('#changed-title')
+    .addEventListener('keydown', keyboardSupportForRenameTaskList);
 
   function keyboardSupportForCreateNewTaskList(e) {
     if (e.keyCode === 13) {
       document.querySelector('#create-new-task-list-bttn').click();
     }
   }
-  document.querySelector('#new-title').addEventListener('keydown', keyboardSupportForCreateNewTaskList);
+  document
+    .querySelector('#new-title')
+    .addEventListener('keydown', keyboardSupportForCreateNewTaskList);
 
   document.body.addEventListener('mousedown', () => {
     document.body.classList.add('using-mouse');
