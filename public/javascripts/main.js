@@ -99,6 +99,10 @@
     const sortStatus = document.querySelector('#sortAlphabetically').checked;
     return sortStatus;
   }
+  function saveSortOption() {
+    const taskListTitle = getTaskListTitle();
+    localStorage.setItem(`${taskListTitle}-sorted`, JSON.stringify(sortIsOn()));
+  }
 
   function addTaskToList(task) {
     const taskList = document.querySelector('#tasks-list');
