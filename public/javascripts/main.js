@@ -435,10 +435,15 @@
   function setCurrentTaskListTite(title) {
     localStorage.setItem('current-task-list', JSON.stringify(title));
   }
+  function setSortOption() {
+    const sortStatus = retrieveSortOptionFromLocalStorage();
+    document.querySelector('#sortAlphabetically').checked = sortStatus;
+  }
   function taskListIsOpen() {
     if (localStorage['current-task-list']) {
       setTitleFromLocalStorage();
       updateTasksFromLocalStorage();
+      setSortOption();
     } else {
       initializeTaskList();
     }
