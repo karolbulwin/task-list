@@ -458,7 +458,6 @@
     if (sortStatus === null) {
       saveSortOption();
     }
-    console.log(sortStatus);
     document.querySelector('#sortAlphabetically').checked = sortStatus;
   }
   function taskListIsOpen() {
