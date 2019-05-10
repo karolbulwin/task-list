@@ -617,6 +617,7 @@
 
   function saveTaskListToFile() {
     const a = document.createElement('a');
+    const taskListTitle = getTaskListTitle();
     const blob = new Blob(
       [
         localStorage.getItem('current-task-list'),
@@ -627,7 +628,7 @@
       { type: 'text/plain' }
     );
     a.href = URL.createObjectURL(blob);
-    a.download = `${getTaskListTitle()}.txt`;
+    a.download = `${taskListTitle}.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
