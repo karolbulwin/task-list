@@ -130,7 +130,7 @@
     return tasks;
   }
 
-  function addTaskToList(task) {
+  function addTaskToList(task, newTask = false) {
     const taskList = document.querySelector('#tasks-list');
     const li = createHtmlElement(task);
 
