@@ -130,6 +130,15 @@
     return tasks;
   }
 
+  function checkOrder(task) {
+    const tasksList = retrieveTasksFromLocalStorage();
+    tasksList.push({ task, taskIsDone: false });
+    const sortedTaskList = sortAlphabetically(tasksList);
+    const arrayOfTasks = sortedTaskList.map(t => t.task);
+    const insertIndex = arrayOfTasks.indexOf(task);
+    return insertIndex;
+  }
+
   function addTaskToList(task, newTask = false) {
     const taskList = document.querySelector('#tasks-list');
     const li = createHtmlElement(task);
