@@ -384,8 +384,12 @@
     });
     return tasks;
   }
-  function updateTasksFromLocalStorage() {
-    const savedTasks = retrieveTasksFromLocalStorage();
+  async function updateTasksFromLocalStorage() {
+    let savedTasks = await retrieveTasksFromLocalStorage();
+    if (retrieveSortOptionFromLocalStorage()) {
+      savedTasks = sortAlphabetically(savedTasks);
+    }
+
     for (let i = 0; i < savedTasks.length; i += 1) {
       addTaskToList(savedTasks[i].task);
       if (savedTasks[i].taskIsDone === true) {
