@@ -182,6 +182,7 @@
   function addTask() {
     const { isTask, task } = checkTask();
     if (isTask === true) {
+      delayAddingNewTask();
       addTaskToList(task, true);
       clearAddedTask();
     }
