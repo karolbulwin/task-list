@@ -545,6 +545,7 @@
       clearInput('#changed-title');
       saveCurrentTaskListToLocalStorage();
       saveNewTitleListToLocalStorage();
+      saveSortOption();
       saveTaskList();
       updateShowTaskListTitles();
     }
