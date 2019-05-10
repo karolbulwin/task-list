@@ -377,6 +377,16 @@
     document.querySelector('.dropdown-menu div').remove();
     showTaskListsTitles();
   }
+
+  function setSortOption(sortDefault = false) {
+    const sortStatus = retrieveSortOptionFromLocalStorage();
+    if (sortStatus === null || sortDefault) {
+      document.querySelector('#sortAlphabetically').checked = false;
+      saveSortOption();
+    }
+    document.querySelector('#sortAlphabetically').checked = sortStatus;
+  }
+  
   function createNewTaskList() {
     const newTitle = getNewTitle();
     if (isTitleCorrect(newTitle)) {
@@ -454,14 +464,7 @@
   function setCurrentTaskListTite(title) {
     localStorage.setItem('current-task-list', JSON.stringify(title));
   }
-  function setSortOption(sortDefault = false) {
-    const sortStatus = retrieveSortOptionFromLocalStorage();
-    if (sortStatus === null || sortDefault) {
-      document.querySelector('#sortAlphabetically').checked = false;
-      saveSortOption();
-    }
-    document.querySelector('#sortAlphabetically').checked = sortStatus;
-  }
+
   function taskListIsOpen() {
     if (localStorage['current-task-list']) {
       setTitleFromLocalStorage();
