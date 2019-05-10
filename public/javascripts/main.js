@@ -104,13 +104,13 @@
     localStorage.setItem(`${taskListTitle}-sorted`, JSON.stringify(sortIsOn()));
   }
   function retrieveTasksFromLocalStorage() {
-    const curretTaskListTitle = JSON.parse(localStorage.getItem('current-task-list'));
-    const savedTasks = JSON.parse(localStorage.getItem(curretTaskListTitle));
+    const currentTaskListTitle = JSON.parse(localStorage.getItem('current-task-list'));
+    const savedTasks = JSON.parse(localStorage.getItem(currentTaskListTitle));
     return savedTasks;
   }
   function retrieveSortOptionFromLocalStorage() {
-    const curretTaskListTitle = JSON.parse(localStorage.getItem('current-task-list'));
-    const sortStatus = JSON.parse(localStorage.getItem(`${curretTaskListTitle}-sorted`));
+    const currentTaskListTitle = JSON.parse(localStorage.getItem('current-task-list'));
+    const sortStatus = JSON.parse(localStorage.getItem(`${currentTaskListTitle}-sorted`));
     return sortStatus;
   }
 
