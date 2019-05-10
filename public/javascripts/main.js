@@ -129,7 +129,7 @@
   function addTask() {
     const { isTask, task } = checkTask();
     if (isTask === true) {
-      addTaskToList(task);
+      addTaskToList(task, true);
       clearAddedTask();
     }
   }
