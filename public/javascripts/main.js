@@ -364,6 +364,11 @@
     const savedTasks = JSON.parse(localStorage.getItem(curretTaskListTitle));
     return savedTasks;
   }
+  function retrieveSortOptionFromLocalStorage() {
+    const curretTaskListTitle = JSON.parse(localStorage.getItem('current-task-list'));
+    const sortStatus = JSON.parse(localStorage.getItem(`${curretTaskListTitle}-sorted`));
+    return sortStatus;
+  }
   function updateTasksFromLocalStorage() {
     const savedTasks = retrieveTasksFromLocalStorage();
     for (let i = 0; i < savedTasks.length; i += 1) {
