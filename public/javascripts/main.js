@@ -393,6 +393,7 @@
 
   function removeTaskListFromLocalStorage(taskListTitle) {
     localStorage.removeItem(taskListTitle);
+    localStorage.removeItem(`${taskListTitle}-sorted`);
   }
 
   function getLastAddedTask() {
