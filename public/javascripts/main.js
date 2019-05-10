@@ -384,6 +384,7 @@
       clearInput('#new-title');
       saveCurrentTaskListToLocalStorage();
       saveNewTitleListToLocalStorage();
+      setSortOption(true);
       removeAllTasks(2);
       saveTaskList();
       updateShowTaskListTitles();
