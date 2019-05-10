@@ -427,6 +427,7 @@
     }
     saveSortOption();
   });
+
   function setCurrentTaskListTite(title) {
     localStorage.setItem('current-task-list', JSON.stringify(title));
   }
