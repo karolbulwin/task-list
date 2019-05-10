@@ -568,6 +568,7 @@
         const splitedTaskList = taskList.split('[');
         const taskListTitle = splitedTaskList[0].slice(1, -1);
         const tasks = `[${splitedTaskList[1]}`;
+        const sorted = splitedTaskList[2];
 
         if (taskListTitle !== '') {
           if (noRepeatedTaskListTitle(taskListTitle) === true) {
@@ -575,6 +576,7 @@
               await clearTaskList();
               await localStorage.setItem('current-task-list', JSON.stringify(taskListTitle));
               await localStorage.setItem(taskListTitle, tasks);
+              await localStorage.setItem(`${taskListTitle}-sorted`, sorted);
               await saveNewTitleListToLocalStorage(taskListTitle);
               await taskListIsOpen();
             }());
@@ -589,6 +591,7 @@
                 await removeTaskListTitleFromLocalStorage(taskListTitle);
                 await localStorage.setItem('current-task-list', JSON.stringify(taskListTitle));
                 await localStorage.setItem(taskListTitle, tasks);
+                await localStorage.setItem(`${taskListTitle}-sorted`, sorted);
                 await saveNewTitleListToLocalStorage(taskListTitle);
                 await taskListIsOpen();
               }());
