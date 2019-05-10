@@ -1,5 +1,5 @@
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   background-color: #ffffe0;
   -webkit-user-select: none;
   -moz-user-select: none;
@@ -49,11 +49,15 @@ h1 {
       .navbar .navbar-collapse .navbar-nav .dropdown-menu li.dropdown-item {
         white-space: normal;
         word-break: break-word; }
+    .navbar .navbar-collapse .custom-checkbox
+.custom-control-input:checked
+~ .custom-control-label::before {
+      background-color: #189a18; }
 
 #info-bar .modal-content .modal-header {
-  border-radius: .3em; }
+  border-radius: 0.3em; }
 
-input[type=text] {
+input[type="text"] {
   -webkit-box-shadow: inset 0.0275em 0.0325em 0.4125em -0.045em rgba(0, 0, 0, 0.3);
   box-shadow: inset 0.0275em 0.0325em 0.4125em -0.045em rgba(0, 0, 0, 0.3); }
 
