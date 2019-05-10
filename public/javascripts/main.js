@@ -369,6 +369,21 @@
     const sortStatus = JSON.parse(localStorage.getItem(`${curretTaskListTitle}-sorted`));
     return sortStatus;
   }
+  function sortAlphabetically(taksList) {
+    const tasks = taksList;
+    tasks.sort((a, b) => {
+      const x = a.task.toLowerCase();
+      const y = b.task.toLowerCase();
+      if (x < y) {
+        return -1;
+      }
+      if (x > y) {
+        return 1;
+      }
+      return 0;
+    });
+    return tasks;
+  }
   function updateTasksFromLocalStorage() {
     const savedTasks = retrieveTasksFromLocalStorage();
     for (let i = 0; i < savedTasks.length; i += 1) {
