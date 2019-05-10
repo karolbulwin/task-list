@@ -117,7 +117,13 @@
   function addTaskToList(task) {
     const taskList = document.querySelector('#tasks-list');
     const li = createHtmlElement(task);
-    taskList.append(li);
+
+    if (newTask && retrieveSortOptionFromLocalStorage()) {
+      taskList.insertBefore(li, taskList.childNodes[checkOrder(task)]);
+    } else {
+      taskList.appendChild(li);
+    }
+
     setTimeout(() => {
       li.classList.remove('new-task');
       setProgress();
