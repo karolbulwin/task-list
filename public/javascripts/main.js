@@ -386,7 +386,7 @@
     }
     document.querySelector('#sortAlphabetically').checked = sortStatus;
   }
-  
+
   function createNewTaskList() {
     const newTitle = getNewTitle();
     if (isTitleCorrect(newTitle)) {
