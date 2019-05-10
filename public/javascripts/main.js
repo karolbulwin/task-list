@@ -581,7 +581,10 @@
         const splitedTaskList = taskList.split('[');
         const taskListTitle = splitedTaskList[0].slice(1, -1);
         const tasks = `[${splitedTaskList[1]}`;
-        const sorted = splitedTaskList[2];
+        let sorted = splitedTaskList[2];
+        if (sorted === undefined) {
+          sorted = false;
+        }
 
         if (taskListTitle !== '') {
           if (noRepeatedTaskListTitle(taskListTitle)) {
