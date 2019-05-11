@@ -166,12 +166,12 @@
     return arrayOfTasks;
   }
 
-  function showMessage(message) {
+  function showMessage(message, time = 3500) {
     document.querySelector('#info-for-user').innerText = message;
     $('#info-bar').modal('show');
     setTimeout(() => {
       $('#info-bar').modal('hide');
-    }, 3500);
+    }, time);
   }
 
   function showRepeatedTask(task) {
