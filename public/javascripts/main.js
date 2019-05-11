@@ -158,12 +158,27 @@
   function clearAddedTask() {
     document.querySelector('#task').value = '';
   }
+
+  function getArrayOfTasks() {
+    const tasksList = retrieveTasksFromLocalStorage();
+    const sortedTaskList = sortAlphabetically(tasksList);
+    const arrayOfTasks = sortedTaskList.map(t => t.task);
+    return arrayOfTasks;
+  }
+
+  // function showTask
+
   function checkTask() {
+    const arrayOfTasks = getArrayOfTasks();
     let isTask = true;
     let task = document.querySelector('#task').value;
     task = task.trim();
+
     if (task === '') {
       isTask = false;
+    } else if (arrayOfTasks.includes(task)) {
+      isTask = false;
+      showError(`${task} is already on the list`);
     }
     return { isTask, task };
   }
