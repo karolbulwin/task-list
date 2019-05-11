@@ -194,6 +194,7 @@
     } else if (arrayOfTasks.includes(task)) {
       isTask = false;
       showMessage(`${task} is already on the list.`);
+      clearAddedTask();
       showRepeatedTask(task);
     }
     return { isTask, task };
