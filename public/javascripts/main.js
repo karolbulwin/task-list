@@ -353,7 +353,7 @@
       if (noRepeatedTaskListTitle(title) === true) {
         isCorrect = true;
       } else {
-        showMessage('There is a task list with such a title');
+        showMessage('There is a task list with such a title.');
       }
     }
     return isCorrect;
