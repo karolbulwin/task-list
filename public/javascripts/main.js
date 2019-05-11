@@ -196,7 +196,9 @@
       isTask = false;
       showMessage(`${task} is already on the list.`, 1500);
       clearAddedTask();
-      showRepeatedTask(task);
+      setTimeout(() => {
+        showRepeatedTask(task);
+      }, 1530);
     }
     return { isTask, task };
   }
