@@ -178,6 +178,7 @@
     const tasks = document.querySelectorAll('#tasks-list li');
     tasks.forEach((li) => {
       if (li.childNodes[0].textContent === task) {
+        document.body.classList.remove('using-mouse');
         li.focus();
       }
     });
