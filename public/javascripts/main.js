@@ -162,7 +162,7 @@
   function getArrayOfTasks() {
     const tasksList = retrieveTasksFromLocalStorage();
     const sortedTaskList = sortAlphabetically(tasksList);
-    const arrayOfTasks = sortedTaskList.map(t => t.task);
+    const arrayOfTasks = sortedTaskList.map(t => t.task.toUpperCase());
     return arrayOfTasks;
   }
 
@@ -177,7 +177,7 @@
   function showRepeatedTask(task) {
     const tasks = document.querySelectorAll('#tasks-list li');
     tasks.forEach((li) => {
-      if (li.childNodes[0].textContent === task) {
+      if (li.childNodes[0].textContent.toUpperCase() === task.toUpperCase()) {
         document.body.classList.remove('using-mouse');
         li.focus();
       }
@@ -192,7 +192,7 @@
 
     if (task === '') {
       isTask = false;
-    } else if (arrayOfTasks.includes(task)) {
+    } else if (arrayOfTasks.includes(task.toUpperCase())) {
       isTask = false;
       showMessage(`${task} is already on the list.`, 1500);
       clearAddedTask();
