@@ -184,7 +184,7 @@
       isTask = false;
     } else if (arrayOfTasks.includes(task)) {
       isTask = false;
-      showMessage(`${task} is already on the list`);
+      showMessage(`${task} is already on the list.`);
     }
     return { isTask, task };
   }
