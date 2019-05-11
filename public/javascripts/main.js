@@ -166,7 +166,13 @@
     return arrayOfTasks;
   }
 
-  // function showTask
+  function showMessage(message) {
+    document.querySelector('#info-for-user').innerText = message;
+    $('#info-bar').modal('show');
+    setTimeout(() => {
+      $('#info-bar').modal('hide');
+    }, 3500);
+  }
 
   function checkTask() {
     const arrayOfTasks = getArrayOfTasks();
@@ -339,14 +345,6 @@
     let newTitle = document.querySelector('#new-title').value;
     newTitle = newTitle.trim();
     return newTitle;
-  }
-
-  function showError(err) {
-    document.querySelector('#info-for-user').innerText = err;
-    $('#info-bar').modal('show');
-    setTimeout(() => {
-      $('#info-bar').modal('hide');
-    }, 3500);
   }
 
   function isTitleCorrect(title) {
