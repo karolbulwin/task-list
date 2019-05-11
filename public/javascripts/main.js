@@ -174,6 +174,15 @@
     }, 3500);
   }
 
+  function showRepeatedTask(task) {
+    const tasks = document.querySelectorAll('#tasks-list li');
+    tasks.forEach((li) => {
+      if (li.childNodes[0].textContent === task) {
+        li.focus();
+      }
+    });
+  }
+
   function checkTask() {
     const arrayOfTasks = getArrayOfTasks();
     let isTask = true;
@@ -185,6 +194,7 @@
     } else if (arrayOfTasks.includes(task)) {
       isTask = false;
       showMessage(`${task} is already on the list.`);
+      showRepeatedTask(task);
     }
     return { isTask, task };
   }
