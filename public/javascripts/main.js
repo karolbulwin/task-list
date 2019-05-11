@@ -184,7 +184,7 @@
       isTask = false;
     } else if (arrayOfTasks.includes(task)) {
       isTask = false;
-      showError(`${task} is already on the list`);
+      showMessage(`${task} is already on the list`);
     }
     return { isTask, task };
   }
@@ -353,7 +353,7 @@
       if (noRepeatedTaskListTitle(title) === true) {
         isCorrect = true;
       } else {
-        showError('There is a task list with such a title');
+        showMessage('There is a task list with such a title');
       }
     }
     return isCorrect;
@@ -613,7 +613,7 @@
             $('#overwrite-task-list').modal('show');
             $('#task-list-to-overwrite').text(taskListTitle);
             document.querySelector('#overwrite-task-list-bttn').addEventListener('click', () => {
-              showError(`${taskListTitle} was overwritten!`);
+              showMessage(`${taskListTitle} was overwritten!`);
               (async function removeOldAndAddNewTaskListToLocalSotrage() {
                 await clearTaskList();
                 await removeTaskListFromLocalStorage(taskListTitle);
@@ -633,13 +633,13 @@
         if (oFile.type === rFilter) {
           oFReader.readAsText(oFile);
         } else {
-          showError('Error: Incorrect file!');
+          showMessage('Error: Incorrect file!');
         }
         closeMenuSettings();
       };
       document.querySelector('#upload-tasks-from-file').addEventListener('click', load);
     } else {
-      showError("Error: The browser doesn't support the FileReader Object!");
+      showMessage("Error: The browser doesn't support the FileReader Object!");
     }
   }
   loadTasksFromFile();
