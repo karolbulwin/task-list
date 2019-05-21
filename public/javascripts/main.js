@@ -207,7 +207,6 @@
       document
         .querySelector('#bttn-edit-task-new')
         .removeEventListener('click', createNewTaskFromEditedTask);
-      console.log('dsd');
     });
   }
 
