@@ -462,7 +462,8 @@
     for (let i = 0; i < savedTasks.length; i += 1) {
       addTaskToList(savedTasks[i].task);
       if (savedTasks[i].taskIsDone === true) {
-        getLastAddedTask().click();
+        getLastAddedTask().classList.add('checked-bg');
+        getLastAddedTask().firstChild.classList.add('checked');
       }
     }
     setTimeout(() => {
