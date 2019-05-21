@@ -292,6 +292,7 @@
       saveTaskList();
     }, 600);
   }
+
   function addEventListenerForTasks() {
     const taskList = document.querySelector('#tasks-list');
     let timeOfMouseDown;
