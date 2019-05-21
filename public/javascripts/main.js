@@ -203,14 +203,16 @@
     return { isTask, task };
   }
 
-  function delayAddingNewTask() {
+  function delayAddingNewTask(focusOnInput = true) {
     const taksInput = document.querySelector('#task');
     taksInput.setAttribute('disabled', true);
     taksInput.placeholder = 'Adding...';
     setTimeout(() => {
       taksInput.removeAttribute('disabled');
       taksInput.placeholder = 'Type Your task here...';
-      taksInput.focus();
+      if (focusOnInput) {
+        taksInput.focus();
+      }
     }, 600);
   }
 
@@ -247,7 +249,7 @@
 
       if (isTask === true) {
         setTimeout(() => {
-          delayAddingNewTask();
+          delayAddingNewTask(false);
           addTaskToList(task, true);
           clearAddedTask('#edit-task');
         }, 50);
