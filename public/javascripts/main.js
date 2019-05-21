@@ -155,8 +155,8 @@
       saveTaskList();
     }, 600);
   }
-  function clearAddedTask() {
-    document.querySelector('#task').value = '';
+  function clearAddedTask(id) {
+    document.querySelector(id).value = '';
   }
 
   function getArrayOfTasks() {
@@ -195,7 +195,7 @@
     } else if (arrayOfTasks.includes(task.toUpperCase())) {
       isTask = false;
       showMessage(`${task} is already on the list.`, 1500);
-      clearAddedTask();
+      clearAddedTask(id);
       setTimeout(() => {
         showRepeatedTask(task);
       }, 1530);
@@ -219,7 +219,7 @@
     if (isTask === true) {
       delayAddingNewTask();
       addTaskToList(task, true);
-      clearAddedTask();
+      clearAddedTask('#task');
     }
   }
   document.querySelector('#button-add-task').addEventListener('click', addTask);
