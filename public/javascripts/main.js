@@ -159,57 +159,6 @@
     document.querySelector(id).value = '';
   }
 
-  function editTaks(taskToEdit) {
-    const oldTask = taskToEdit.firstChild.textContent
-      ? taskToEdit.firstChild.textContent
-      : taskToEdit.textContent;
-    document.querySelector('#edit-task').value = oldTask;
-    $('#edit-task-control').modal('show');
-    $('#edit-task-control').on('shown.bs.modal', () => {
-      $('#edit-task').trigger('focus');
-    });
-
-    function saveEditedTask() {
-      const { isTask, task } = checkTask('#edit-task');
-
-      if (isTask === true) {
-        setTimeout(() => {
-          // setTimeout for checkTask - first check then add task
-          document.querySelectorAll('#tasks-list li').forEach((li) => {
-            if (li.firstChild.textContent === oldTask) {
-              const newTask = li.firstChild;
-              newTask.textContent = task;
-            }
-          });
-          saveTaskList();
-        }, 50);
-      }
-    }
-    document.querySelector('#bttn-edit-task').addEventListener('click', saveEditedTask);
-
-    function createNewTaskFromEditedTask() {
-      const { isTask, task } = checkTask('#edit-task');
-
-      if (isTask === true) {
-        setTimeout(() => {
-          delayAddingNewTask();
-          addTaskToList(task, true);
-          clearAddedTask('#edit-task');
-        }, 50);
-      }
-    }
-    document
-      .querySelector('#bttn-edit-task-new')
-      .addEventListener('click', createNewTaskFromEditedTask);
-
-    $('#edit-task-control').on('hidden.bs.modal', () => {
-      document.querySelector('#bttn-edit-task').removeEventListener('click', saveEditedTask);
-      document
-        .querySelector('#bttn-edit-task-new')
-        .removeEventListener('click', createNewTaskFromEditedTask);
-    });
-  }
-
   function getArrayOfTasks() {
     const tasksList = retrieveTasksFromLocalStorage();
     const sortedTaskList = sortAlphabetically(tasksList);
@@ -263,6 +212,57 @@
       taksInput.placeholder = 'Type Your task here...';
       taksInput.focus();
     }, 600);
+  }
+
+  function editTaks(taskToEdit) {
+    const oldTask = taskToEdit.firstChild.textContent
+      ? taskToEdit.firstChild.textContent
+      : taskToEdit.textContent;
+    document.querySelector('#edit-task').value = oldTask;
+    $('#edit-task-control').modal('show');
+    $('#edit-task-control').on('shown.bs.modal', () => {
+      $('#edit-task').trigger('focus');
+    });
+
+    function saveEditedTask() {
+      const { isTask, task } = checkTask('#edit-task');
+
+      if (isTask === true) {
+        setTimeout(() => {
+          // setTimeout for checkTask - first check then add task
+          document.querySelectorAll('#tasks-list li').forEach((li) => {
+            if (li.firstChild.textContent === oldTask) {
+              const newTask = li.firstChild;
+              newTask.textContent = task;
+            }
+          });
+          saveTaskList();
+        }, 50);
+      }
+    }
+    document.querySelector('#bttn-edit-task').addEventListener('click', saveEditedTask);
+
+    function createNewTaskFromEditedTask() {
+      const { isTask, task } = checkTask('#edit-task');
+
+      if (isTask === true) {
+        setTimeout(() => {
+          delayAddingNewTask();
+          addTaskToList(task, true);
+          clearAddedTask('#edit-task');
+        }, 50);
+      }
+    }
+    document
+      .querySelector('#bttn-edit-task-new')
+      .addEventListener('click', createNewTaskFromEditedTask);
+
+    $('#edit-task-control').on('hidden.bs.modal', () => {
+      document.querySelector('#bttn-edit-task').removeEventListener('click', saveEditedTask);
+      document
+        .querySelector('#bttn-edit-task-new')
+        .removeEventListener('click', createNewTaskFromEditedTask);
+    });
   }
 
   function addTask() {
