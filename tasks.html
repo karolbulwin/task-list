@@ -289,6 +289,71 @@
 
       <div
         class="modal fade"
+        id="edit-task-control"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="editing-task"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="editing-task">
+                Edit Your task
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                tabindex="-1"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="cheanged-title"></label>
+                <input
+                  type="text"
+                  class="form-control"
+                  name="edit-task"
+                  id="edit-task"
+                  aria-describedby="bttn-edit-task"
+                  placeholder="Your task here..."
+                />
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                class="btn btn-success"
+                id="bttn-edit-task"
+                data-dismiss="modal"
+              >
+                Save current
+              </button>
+              <button
+                type="button"
+                class="btn btn-success"
+                id="bttn-edit-task-new"
+                data-dismiss="modal"
+              >
+                Add new
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="modal fade"
         id="change-task-list-title"
         tabindex="-1"
         role="dialog"
