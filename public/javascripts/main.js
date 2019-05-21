@@ -294,27 +294,91 @@
   }
   function addEventListenerForTasks() {
     const taskList = document.querySelector('#tasks-list');
+    let timeOfMouseDown;
+
+    function setTimer(time) {
+      timeOfMouseDown = time;
+      return timeOfMouseDown;
+    }
+
+    function handlerStart() {
+      setTimer(new Date());
+    }
+
+    ['mousedown', 'touchstart'].forEach((event) => {
+      window.addEventListener(event, handlerStart);
+    });
+
     taskList.addEventListener(
-      'click',
+      'mouseup',
       (ev) => {
-        if (ev.target.tagName === 'LI') {
-          ev.target.classList.toggle('checked-bg');
-          ev.target.firstElementChild.classList.toggle('checked');
+        const timeOfMouseUp = new Date();
+        const time = timeOfMouseUp - timeOfMouseDown;
+
+        if (time < 300) {
+          if (ev.target.tagName === 'LI') {
+            ev.target.classList.toggle('checked-bg');
+            ev.target.firstElementChild.classList.toggle('checked');
+          }
+          if (ev.target.tagName === 'P') {
+            ev.target.classList.toggle('checked');
+            ev.target.parentElement.classList.toggle('checked-bg');
+          }
+          if (ev.target.tagName === 'SPAN') {
+            const task = ev.target.parentElement.parentElement;
+            removeTaskFromList(task);
+          }
+          if (ev.target.tagName === 'BUTTON') {
+            const task = ev.target.parentElement;
+            removeTaskFromList(task);
+          }
+          setProgress();
+          saveTaskList();
+        } else {
+          if (ev.target.tagName === 'LI') {
+            editTaks(ev.target);
+          }
+          if (ev.target.tagName === 'P') {
+            editTaks(ev.target);
+          }
         }
-        if (ev.target.tagName === 'P') {
-          ev.target.classList.toggle('checked');
-          ev.target.parentElement.classList.toggle('checked-bg');
+      },
+      false
+    );
+    taskList.addEventListener(
+      'touchend',
+      (ev) => {
+        const timeOfMouseUp = new Date();
+        const time = timeOfMouseUp - timeOfMouseDown;
+        ev.preventDefault();
+
+        if (time < 300) {
+          if (ev.target.tagName === 'LI') {
+            ev.target.classList.toggle('checked-bg');
+            ev.target.firstElementChild.classList.toggle('checked');
+          }
+          if (ev.target.tagName === 'P') {
+            ev.target.classList.toggle('checked');
+            ev.target.parentElement.classList.toggle('checked-bg');
+          }
+          if (ev.target.tagName === 'SPAN') {
+            const task = ev.target.parentElement.parentElement;
+            removeTaskFromList(task);
+          }
+          if (ev.target.tagName === 'BUTTON') {
+            const task = ev.target.parentElement;
+            removeTaskFromList(task);
+          }
+          setProgress();
+          saveTaskList();
+        } else {
+          if (ev.target.tagName === 'LI') {
+            editTaks(ev.target);
+          }
+          if (ev.target.tagName === 'P') {
+            editTaks(ev.target);
+          }
         }
-        if (ev.target.tagName === 'SPAN') {
-          const task = ev.target.parentElement.parentElement;
-          removeTaskFromList(task);
-        }
-        if (ev.target.tagName === 'BUTTON') {
-          const task = ev.target.parentElement;
-          removeTaskFromList(task);
-        }
-        setProgress();
-        saveTaskList();
       },
       false
     );
