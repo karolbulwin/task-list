@@ -184,10 +184,10 @@
     });
   }
 
-  function checkTask() {
+  function checkTask(id) {
     const arrayOfTasks = getArrayOfTasks();
     let isTask = true;
-    let task = document.querySelector('#task').value;
+    let task = document.querySelector(id).value;
     task = task.trim();
 
     if (task === '') {
@@ -215,7 +215,7 @@
   }
 
   function addTask() {
-    const { isTask, task } = checkTask();
+    const { isTask, task } = checkTask('#task');
     if (isTask === true) {
       delayAddingNewTask();
       addTaskToList(task, true);
