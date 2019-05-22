@@ -908,6 +908,16 @@
     .querySelector('#new-title')
     .addEventListener('keydown', keyboardSupportForCreateNewTaskList);
 
+  $('#change-task-list-title').on('shown.bs.modal', () => {
+    //
+    $('#changed-title').trigger('focus');
+  });
+
+  $('#create-new-task-list').on('shown.bs.modal', () => {
+    //
+    $('#new-title').trigger('focus');
+  });
+
   document.body.addEventListener('mousedown', () => {
     document.body.classList.add('using-mouse');
   });
