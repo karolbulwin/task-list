@@ -653,6 +653,7 @@
     clearTaskList();
     setCurrentTaskListTite(title);
     taskListIsOpen();
+    closeMenuSettings();
   }
   function changeCurrentTaskListTitle() {
     const taskListsTitles = document.querySelector('.dropdown-menu');
