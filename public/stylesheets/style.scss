@@ -104,6 +104,8 @@ ul > li {
   p {
     margin: 0;
     word-break: break-word;
+    text-align: center;
+    padding: 0px 0.6em;
   }
   &.to-remove {
     opacity: 0;
