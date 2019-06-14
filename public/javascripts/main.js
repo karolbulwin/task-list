@@ -62,9 +62,9 @@
     let task;
     let taskIsDone;
     for (let i = 0; i < tasks.length; i += 1) {
-      task = tasks[i].firstElementChild.innerText;
+      task = tasks[i].children[1].innerText;
       taskIsDone = false;
-      if (tasks[i].firstElementChild.classList.value === 'checked') {
+      if (tasks[i].children[1].classList.value === 'checked') {
         taskIsDone = true;
       }
       tasksToSave.push({ task, taskIsDone });
@@ -229,8 +229,9 @@
   }
 
   function editTaks(taskToEdit) {
-    const oldTask = taskToEdit.firstChild.textContent
-      ? taskToEdit.firstChild.textContent
+    console.log(taskToEdit);
+    const oldTask = taskToEdit.children[1].textContent
+      ? taskToEdit.children[1].textContent
       : taskToEdit.textContent;
     document.querySelector('#edit-task').value = oldTask;
     $('#edit-task-control').modal('show');
@@ -315,7 +316,7 @@
       (ev) => {
         if (ev.target.tagName === 'LI') {
           ev.target.classList.toggle('checked-bg');
-          ev.target.firstElementChild.classList.toggle('checked');
+          ev.target.children[1].classList.toggle('checked');
         }
         if (ev.target.tagName === 'P') {
           ev.target.classList.toggle('checked');
@@ -405,7 +406,7 @@
     cCForRemoveDone.autoResetCounter();
     if (cCForRemoveDone.clicks === 2) {
       document.querySelectorAll('#tasks-list li').forEach((li) => {
-        if (li.firstElementChild.classList.value === 'checked') {
+        if (li.children[1].classList.value === 'checked') {
           removeTaskFromList(li);
         }
       });
@@ -536,7 +537,7 @@
       addTaskToList(savedTasks[i].task);
       if (savedTasks[i].taskIsDone === true) {
         getLastAddedTask().classList.add('checked-bg');
-        getLastAddedTask().firstChild.classList.add('checked');
+        getLastAddedTask().children[1].classList.add('checked');
       }
     }
     setTimeout(() => {
