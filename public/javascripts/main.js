@@ -310,103 +310,32 @@
 
   function addEventListenerForTasks() {
     const taskList = document.querySelector('#tasks-list');
-    let timeOfMouseDown;
-    let touchmoved;
-
-    function setTimer(time) {
-      timeOfMouseDown = time;
-      return timeOfMouseDown;
-    }
-
-    function handlerStart() {
-      setTimer(new Date());
-    }
-
-    taskList.addEventListener('mousedown', () => {
-      handlerStart();
-    });
-
-    taskList.addEventListener('touchmove', () => {
-      touchmoved = true;
-    });
-
-    taskList.addEventListener('touchstart', () => {
-      touchmoved = false;
-      handlerStart();
-    });
-
     taskList.addEventListener(
-      'mouseup',
+      'click',
       (ev) => {
-        const timeOfMouseUp = new Date();
-        const time = timeOfMouseUp - timeOfMouseDown;
-
-        if (time < 300) {
-          if (ev.target.tagName === 'LI') {
-            ev.target.classList.toggle('checked-bg');
-            ev.target.firstElementChild.classList.toggle('checked');
-          }
-          if (ev.target.tagName === 'P') {
-            ev.target.classList.toggle('checked');
-            ev.target.parentElement.classList.toggle('checked-bg');
-          }
-          if (ev.target.tagName === 'SPAN') {
-            const task = ev.target.parentElement.parentElement;
-            removeTaskFromList(task);
-          }
-          if (ev.target.tagName === 'BUTTON') {
-            const task = ev.target.parentElement;
-            removeTaskFromList(task);
-          }
-          setProgress();
-          saveTaskList();
-        } else {
-          if (ev.target.tagName === 'LI') {
-            editTaks(ev.target);
-          }
-          if (ev.target.tagName === 'P') {
-            editTaks(ev.target);
-          }
+        if (ev.target.tagName === 'LI') {
+          ev.target.classList.toggle('checked-bg');
+          ev.target.firstElementChild.classList.toggle('checked');
         }
-      },
-      false
-    );
-    taskList.addEventListener(
-      'touchend',
-      (ev) => {
-        if (touchmoved !== true) {
-          const timeOfMouseUp = new Date();
-          const time = timeOfMouseUp - timeOfMouseDown;
-          ev.preventDefault();
-
-          if (time < 300) {
-            if (ev.target.tagName === 'LI') {
-              ev.target.classList.toggle('checked-bg');
-              ev.target.firstElementChild.classList.toggle('checked');
-            }
-            if (ev.target.tagName === 'P') {
-              ev.target.classList.toggle('checked');
-              ev.target.parentElement.classList.toggle('checked-bg');
-            }
-            if (ev.target.tagName === 'SPAN') {
-              const task = ev.target.parentElement.parentElement;
-              removeTaskFromList(task);
-            }
-            if (ev.target.tagName === 'BUTTON') {
-              const task = ev.target.parentElement;
-              removeTaskFromList(task);
-            }
-            setProgress();
-            saveTaskList();
-          } else {
-            if (ev.target.tagName === 'LI') {
-              editTaks(ev.target);
-            }
-            if (ev.target.tagName === 'P') {
-              editTaks(ev.target);
-            }
-          }
+        if (ev.target.tagName === 'P') {
+          ev.target.classList.toggle('checked');
+          ev.target.parentElement.classList.toggle('checked-bg');
         }
+        if (ev.target.tagName === 'SPAN' && ev.target.innerText === '×') {
+          const task = ev.target.parentElement.parentElement;
+          removeTaskFromList(task);
+        }
+        if (ev.target.tagName === 'I') {
+          const task = ev.target.parentElement;
+          editTaks(task);
+        }
+        if (ev.target.tagName === 'SPAN' && ev.target.innerText === '') {
+          const task = ev.target.parentElement;
+          editTaks(task);
+        }
+
+        setProgress();
+        saveTaskList();
       },
       false
     );
