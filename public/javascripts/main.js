@@ -245,8 +245,10 @@
         setTimeout(() => {
           // setTimeout for checkTask - first check then add task
           document.querySelectorAll('#tasks-list li').forEach((li) => {
-            if (li.firstChild.textContent === oldTask) {
-              const newTask = li.firstChild;
+            if (li.children[1].textContent === oldTask) {
+              console.log(li);
+              const newTask = li.children[1];
+              console.log(newTask);
               newTask.textContent = task;
             }
           });
