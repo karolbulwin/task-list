@@ -2,8 +2,11 @@
   function createHtmlElement(task) {
     const li = document.createElement('li');
     const p = document.createElement('p');
-    const bttn = document.createElement('button');
-    const span = document.createElement('span');
+    const bttnC = document.createElement('button');
+    const spanC = document.createElement('span');
+    const bttnE = document.createElement('button');
+    const spanE = document.createElement('span');
+    const i = document.createElement('i');
 
     li.classList.add(
       'list-group-item',
@@ -14,15 +17,24 @@
     );
     p.innerText = task;
     li.setAttribute('tabindex', '0');
-    bttn.type = 'button';
-    bttn.classList.add('close');
-    bttn.setAttribute('aria-label', 'Close');
-    span.setAttribute('aria-hidden', 'true');
-    span.innerHTML = '&times;';
+    bttnE.type = 'button';
+    bttnE.classList.add('edit');
+    bttnE.setAttribute('aria-label', 'Edit');
+    spanE.setAttribute('aria-hidden', 'true');
+    i.classList.add('fas', 'fa-pencil-alt');
+    spanE.append(i);
+    bttnE.append(spanE);
 
-    bttn.append(span);
+    bttnC.type = 'button';
+    bttnC.classList.add('close');
+    bttnC.setAttribute('aria-label', 'Close');
+    spanC.setAttribute('aria-hidden', 'true');
+    spanC.innerHTML = '&times;';
+    bttnC.append(spanC);
+
+    li.append(bttnE);
     li.append(p);
-    li.append(bttn);
+    li.append(bttnC);
 
     return li;
   }
