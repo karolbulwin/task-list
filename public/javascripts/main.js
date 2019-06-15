@@ -541,7 +541,7 @@
     }, 100);
   }
   function addExampleTasks() {
-    const exampleTasks = ['task 1', 'task 2', 'task 3'];
+    const exampleTasks = ['Task 1', 'Task 2', 'Task 3'];
     exampleTasks.forEach((task) => {
       addTaskToList(task);
     });
