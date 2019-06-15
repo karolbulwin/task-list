@@ -229,9 +229,7 @@
   }
 
   function editTaks(taskToEdit) {
-    const oldTask = taskToEdit.children[1].textContent
-      ? taskToEdit.children[1].textContent
-      : taskToEdit.textContent;
+    const oldTask = taskToEdit.children[1].textContent;
     document.querySelector('#edit-task').value = oldTask;
     $('#edit-task-control').on('shown.bs.modal', () => {
       $('#edit-task').trigger('focus');
