@@ -189,7 +189,7 @@
   function showRepeatedTask(task) {
     const tasks = document.querySelectorAll('#tasks-list li');
     tasks.forEach((li) => {
-      if (li.childNodes[0].textContent.toUpperCase() === task.toUpperCase()) {
+      if (li.childNodes[1].textContent.toUpperCase() === task.toUpperCase()) {
         document.body.classList.remove('using-mouse');
         li.focus();
       }
