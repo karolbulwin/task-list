@@ -9,7 +9,6 @@ Just click on [task-list](https://karolbulwin.github.io/task-list/tasks.html) an
 ## Usage
 
 Create new task lists. Rename them. Switch between them. Clear completed tasks. Clear all tasks. Delete task lists. Save task list to file. Upload task list from file.
-<video src="video.mp4" width="320" height="200" controls preload></video>
 
 ## Contributing
 
