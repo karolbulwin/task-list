@@ -329,7 +329,7 @@
           editTaks(task);
         }
         if (ev.target.tagName === 'SPAN' && ev.target.innerText === '') {
-          const task = ev.target.parentElement.parentElement.parentElement;
+          const task = ev.target.parentElement.parentElement;
           editTaks(task);
         }
 
