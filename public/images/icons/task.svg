@@ -1,0 +1,12 @@
+<svg width="399.99999999999994" height="399.99999999999994" xmlns="http://www.w3.org/2000/svg">
+ <g>
+  <title>background</title>
+  <rect x="-1" y="-1" width="268.675319" height="268.675319" id="canvas_background" fill="none"/>
+ </g>
+
+ <g>
+  <title>Layer 1</title>
+  <rect transform="matrix(-1.5,0,0,-1.4,470.1,490.8) " fill="rgb(255, 255, 224)" height="266" width="251.5" x="54.316668" y="74.71427" id="svg_1" rx="72" stroke-width="0"/>
+  <text font-size="126.3" fill="rgb(0, 0, 0)" x="27.111207" y="225.88284" id="svg_2" transform="rotate(45 199.97029113769537,200) matrix(1.127811415749418,0,0,1.127811415749418,-12.705832754352997,-5.380921112321088) " stroke="null" font-family="Junction, sans-serif">Tasks</text>
+ </g>
+</svg>
