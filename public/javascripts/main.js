@@ -2,8 +2,11 @@
   function createHtmlElement(task) {
     const li = document.createElement('li');
     const p = document.createElement('p');
-    const bttn = document.createElement('button');
-    const span = document.createElement('span');
+    const bttnC = document.createElement('button');
+    const spanC = document.createElement('span');
+    const bttnE = document.createElement('button');
+    const spanE = document.createElement('span');
+    const i = document.createElement('i');
 
     li.classList.add(
       'list-group-item',
@@ -14,15 +17,24 @@
     );
     p.innerText = task;
     li.setAttribute('tabindex', '0');
-    bttn.type = 'button';
-    bttn.classList.add('close');
-    bttn.setAttribute('aria-label', 'Close');
-    span.setAttribute('aria-hidden', 'true');
-    span.innerHTML = '&times;';
+    bttnE.type = 'button';
+    bttnE.classList.add('edit');
+    bttnE.setAttribute('aria-label', 'Edit');
+    spanE.setAttribute('aria-hidden', 'true');
+    i.classList.add('fas', 'fa-pencil-alt');
+    spanE.append(i);
+    bttnE.append(spanE);
 
-    bttn.append(span);
+    bttnC.type = 'button';
+    bttnC.classList.add('close');
+    bttnC.setAttribute('aria-label', 'Close');
+    spanC.setAttribute('aria-hidden', 'true');
+    spanC.innerHTML = '&times;';
+    bttnC.append(spanC);
+
+    li.append(bttnE);
     li.append(p);
-    li.append(bttn);
+    li.append(bttnC);
 
     return li;
   }
@@ -50,9 +62,9 @@
     let task;
     let taskIsDone;
     for (let i = 0; i < tasks.length; i += 1) {
-      task = tasks[i].firstElementChild.innerText;
+      task = tasks[i].children[1].innerText;
       taskIsDone = false;
-      if (tasks[i].firstElementChild.classList.value === 'checked') {
+      if (tasks[i].children[1].classList.value === 'checked') {
         taskIsDone = true;
       }
       tasksToSave.push({ task, taskIsDone });
@@ -177,7 +189,7 @@
   function showRepeatedTask(task) {
     const tasks = document.querySelectorAll('#tasks-list li');
     tasks.forEach((li) => {
-      if (li.childNodes[0].textContent.toUpperCase() === task.toUpperCase()) {
+      if (li.childNodes[1].textContent.toUpperCase() === task.toUpperCase()) {
         document.body.classList.remove('using-mouse');
         li.focus();
       }
@@ -217,14 +229,13 @@
   }
 
   function editTaks(taskToEdit) {
-    const oldTask = taskToEdit.firstChild.textContent
-      ? taskToEdit.firstChild.textContent
-      : taskToEdit.textContent;
+    const oldTask = taskToEdit.children[1].textContent;
     document.querySelector('#edit-task').value = oldTask;
-    $('#edit-task-control').modal('show');
     $('#edit-task-control').on('shown.bs.modal', () => {
       $('#edit-task').trigger('focus');
     });
+    $('#edit-task-control').modal('show');
+
 
     function saveEditedTask() {
       const { isTask, task } = checkTask('#edit-task');
@@ -233,8 +244,8 @@
         setTimeout(() => {
           // setTimeout for checkTask - first check then add task
           document.querySelectorAll('#tasks-list li').forEach((li) => {
-            if (li.firstChild.textContent === oldTask) {
-              const newTask = li.firstChild;
+            if (li.children[1].textContent === oldTask) {
+              const newTask = li.children[1];
               newTask.textContent = task;
             }
           });
@@ -296,103 +307,32 @@
 
   function addEventListenerForTasks() {
     const taskList = document.querySelector('#tasks-list');
-    let timeOfMouseDown;
-    let touchmoved;
-
-    function setTimer(time) {
-      timeOfMouseDown = time;
-      return timeOfMouseDown;
-    }
-
-    function handlerStart() {
-      setTimer(new Date());
-    }
-
-    taskList.addEventListener('mousedown', () => {
-      handlerStart();
-    });
-
-    taskList.addEventListener('touchmove', () => {
-      touchmoved = true;
-    });
-
-    taskList.addEventListener('touchstart', () => {
-      touchmoved = false;
-      handlerStart();
-    });
-
     taskList.addEventListener(
-      'mouseup',
+      'click',
       (ev) => {
-        const timeOfMouseUp = new Date();
-        const time = timeOfMouseUp - timeOfMouseDown;
-
-        if (time < 300) {
-          if (ev.target.tagName === 'LI') {
-            ev.target.classList.toggle('checked-bg');
-            ev.target.firstElementChild.classList.toggle('checked');
-          }
-          if (ev.target.tagName === 'P') {
-            ev.target.classList.toggle('checked');
-            ev.target.parentElement.classList.toggle('checked-bg');
-          }
-          if (ev.target.tagName === 'SPAN') {
-            const task = ev.target.parentElement.parentElement;
-            removeTaskFromList(task);
-          }
-          if (ev.target.tagName === 'BUTTON') {
-            const task = ev.target.parentElement;
-            removeTaskFromList(task);
-          }
-          setProgress();
-          saveTaskList();
-        } else {
-          if (ev.target.tagName === 'LI') {
-            editTaks(ev.target);
-          }
-          if (ev.target.tagName === 'P') {
-            editTaks(ev.target);
-          }
+        if (ev.target.tagName === 'LI') {
+          ev.target.classList.toggle('checked-bg');
+          ev.target.children[1].classList.toggle('checked');
         }
-      },
-      false
-    );
-    taskList.addEventListener(
-      'touchend',
-      (ev) => {
-        if (touchmoved !== true) {
-          const timeOfMouseUp = new Date();
-          const time = timeOfMouseUp - timeOfMouseDown;
-          ev.preventDefault();
-
-          if (time < 300) {
-            if (ev.target.tagName === 'LI') {
-              ev.target.classList.toggle('checked-bg');
-              ev.target.firstElementChild.classList.toggle('checked');
-            }
-            if (ev.target.tagName === 'P') {
-              ev.target.classList.toggle('checked');
-              ev.target.parentElement.classList.toggle('checked-bg');
-            }
-            if (ev.target.tagName === 'SPAN') {
-              const task = ev.target.parentElement.parentElement;
-              removeTaskFromList(task);
-            }
-            if (ev.target.tagName === 'BUTTON') {
-              const task = ev.target.parentElement;
-              removeTaskFromList(task);
-            }
-            setProgress();
-            saveTaskList();
-          } else {
-            if (ev.target.tagName === 'LI') {
-              editTaks(ev.target);
-            }
-            if (ev.target.tagName === 'P') {
-              editTaks(ev.target);
-            }
-          }
+        if (ev.target.tagName === 'P') {
+          ev.target.classList.toggle('checked');
+          ev.target.parentElement.classList.toggle('checked-bg');
         }
+        if (ev.target.tagName === 'SPAN' && ev.target.innerText === '×') {
+          const task = ev.target.parentElement.parentElement;
+          removeTaskFromList(task);
+        }
+        if (ev.target.tagName === 'I') {
+          const task = ev.target.parentElement.parentElement.parentElement;
+          editTaks(task);
+        }
+        if (ev.target.tagName === 'SPAN' && ev.target.innerText === '') {
+          const task = ev.target.parentElement.parentElement;
+          editTaks(task);
+        }
+
+        setProgress();
+        saveTaskList();
       },
       false
     );
@@ -462,7 +402,7 @@
     cCForRemoveDone.autoResetCounter();
     if (cCForRemoveDone.clicks === 2) {
       document.querySelectorAll('#tasks-list li').forEach((li) => {
-        if (li.firstElementChild.classList.value === 'checked') {
+        if (li.children[1].classList.value === 'checked') {
           removeTaskFromList(li);
         }
       });
@@ -593,7 +533,7 @@
       addTaskToList(savedTasks[i].task);
       if (savedTasks[i].taskIsDone === true) {
         getLastAddedTask().classList.add('checked-bg');
-        getLastAddedTask().firstChild.classList.add('checked');
+        getLastAddedTask().children[1].classList.add('checked');
       }
     }
     setTimeout(() => {

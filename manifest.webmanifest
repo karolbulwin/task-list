@@ -25,7 +25,7 @@
   }],
   "start_url": "/task-list/tasks.html",
   "scope": "/task-list/",
-  "display": "fullscreen",
+  "display": "standalone",
   "theme_color": "#ffffe0",
   "background_color": "#ffffe0"
 }
