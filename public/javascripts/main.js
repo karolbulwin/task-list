@@ -233,10 +233,11 @@
       ? taskToEdit.children[1].textContent
       : taskToEdit.textContent;
     document.querySelector('#edit-task').value = oldTask;
-    $('#edit-task-control').modal('show');
     $('#edit-task-control').on('shown.bs.modal', () => {
       $('#edit-task').trigger('focus');
     });
+    $('#edit-task-control').modal('show');
+
 
     function saveEditedTask() {
       const { isTask, task } = checkTask('#edit-task');
